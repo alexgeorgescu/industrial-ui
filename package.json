@@ -1,0 +1,43 @@
+{
+  "name": "industrial-ui",
+  "version": "1.0.0",
+  "description": "A lightweight modular UI Library built with TypeScript and Web Components",
+  "license": "ISC",
+  "author": "Alexandru Georgescu",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./button": {
+      "import": "./dist/components/button/index.js",
+      "types": "./dist/components/button/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "web-components",
+    "ui-library",
+    "typescript",
+    "components"
+  ],
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "lint": "tsc --noEmit",
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18",
+    "happy-dom": "^20.5.0"
+  }
+}
