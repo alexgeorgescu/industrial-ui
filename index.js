@@ -1,4 +1,4 @@
-var n=class extends HTMLElement{constructor(){super();this._initialized=false;this.shadow=this.attachShadow({mode:"open"});}connectedCallback(){this._initialized||(this.render(),this._initialized=true);}injectStyles(e){let o=document.createElement("style");o.textContent=e,this.shadow.appendChild(o);}emit(e,o){this.dispatchEvent(new CustomEvent(e,{detail:o,bubbles:true,composed:true}));}getAttr(e,o=""){return this.getAttribute(e)||o}getAttrArray(e){let o=this.getAttribute(e)||null;if(o)try{return JSON.parse(o)}catch{return []}return []}hasAttr(e){return this.hasAttribute(e)&&this.getAttribute(e)!=="false"}};var d=class extends n{constructor(){super(),this.attachEventListeners();}render(){this.injectStyles(this.getStyles());let t=document.createElement("div");t.className="application";let e=document.createElement("slot");e.name="header";let o=document.createElement("div");o.className="main-container";let r=document.createElement("slot");r.name="sidebar";let i=document.createElement("slot");o.appendChild(r),o.appendChild(i),t.appendChild(e),t.appendChild(o),this.shadow.appendChild(t);}attachEventListeners(){this.addEventListener("click",t=>{console.log("Application clicked",t);});}getStyles(){return `
+var n=class extends HTMLElement{constructor(){super();this._initialized=false;this.shadow=this.attachShadow({mode:"open"});}connectedCallback(){this._initialized||(this.render(),this._initialized=true);}injectStyles(e){let o=document.createElement("style");o.textContent=e,this.shadow.appendChild(o);}emit(e,o){this.dispatchEvent(new CustomEvent(e,{detail:o,bubbles:true,composed:true}));}getAttr(e,o=""){return this.getAttribute(e)||o}getAttrArray(e){let o=this.getAttribute(e)||null;if(o)try{return JSON.parse(o)}catch{return []}return []}hasAttr(e){return this.hasAttribute(e)&&this.getAttribute(e)!=="false"}};var d=class extends n{constructor(){super(),this.attachEventListeners();}render(){this.injectStyles(this.getStyles());let t=document.createElement("div");t.className="application";let e=document.createElement("slot");e.name="header";let o=document.createElement("div");o.className="main-container";let r=document.createElement("slot");r.name="sidebar";let i=document.createElement("div");i.className="main-contents";let a=document.createElement("slot");i.appendChild(a),o.appendChild(r),o.appendChild(i),t.appendChild(e),t.appendChild(o),this.shadow.appendChild(t);}attachEventListeners(){this.addEventListener("click",t=>{console.log("Application clicked",t);});}getStyles(){return `
       :host {
         display: flex;
         flex-direction: column;
@@ -19,6 +19,13 @@ var n=class extends HTMLElement{constructor(){super();this._initialized=false;th
         display: flex;
         height: 100vh;
         flex-direction: row;
+        overflow: hidden;
+      }
+      
+      .main-contents {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
         overflow-y: scroll;
       }
       `}};customElements.define("ind-application",d);var l=class extends n{constructor(){super(),this.attachEventListeners();}static get observedAttributes(){return ["variant","disabled"]}attributeChangedCallback(t,e,o){t&&e!==o&&this.render();}render(){for(;this.shadow.firstChild;)this.shadow.removeChild(this.shadow.firstChild);let t=this.getAttr("variant","primary"),e=this.hasAttr("disabled");this.injectStyles(this.getStyles());let o=document.createElement("button"),r=document.createElement("slot");o.className=`btn btn-${t}`,o.appendChild(r),o.disabled=e,this.shadow.appendChild(o);}attachEventListeners(){this.addEventListener("click",t=>{console.log("Button clicked",t);});}getStyles(){return `
@@ -124,8 +131,10 @@ var n=class extends HTMLElement{constructor(){super();this._initialized=false;th
 
       .card-footer {
         display: flex;
+        flex-direction: row;
         padding: 1rem;
         border-top: 1px solid var(--border-color);
+        justify-content: end;
         gap: 0.5rem;
       }
       `}};customElements.define("ind-card",c);var m=class extends n{constructor(){super(),this.attachEventListeners();}render(){this.injectStyles(this.getStyles());let t=document.createElement("div");t.className="header";let e=document.createElement("slot");t.appendChild(e),this.shadow.appendChild(t);}attachEventListeners(){this.addEventListener("click",t=>{console.log("Header clicked",t);});}getStyles(){return `
