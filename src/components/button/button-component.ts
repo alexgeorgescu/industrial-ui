@@ -21,9 +21,19 @@ export class IndButton extends IndBaseComponent {
         return ['variant', 'disabled'];
     }
 
+    attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null) {
+        if (name && (oldValue !== newValue)) {
+            this.render();
+        }
+    }
+
     protected render(): void {
+        // Clear shadow DOM before rendering
+        while (this.shadow.firstChild) {
+            this.shadow.removeChild(this.shadow.firstChild);
+        }
         const variant: string | 'primary' | 'secondary' | 'success' | 'info' | 'warn' | 'danger' = this.getAttr('variant', 'primary');
-        const disabled: boolean = this.hasAttr('disabled');
+        const disabled: boolean                                                                  = this.hasAttr('disabled');
 
         this.injectStyles(this.getStyles());
 
