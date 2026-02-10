@@ -26,10 +26,9 @@
     "components"
   ],
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
+    "deploy": "npm run build && gh-pages -d dist",
     "dev": "tsup --watch && copy src/assets/logo.svg dist",
-    "build": "tsup && copy src/assets/logo.svg dist",
+    "build": "tsup",
     "lint": "tsc --noEmit",
     "test": "vitest"
   },

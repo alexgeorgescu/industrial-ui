@@ -17,10 +17,16 @@ export default defineConfig({
     outDir: 'dist',
     esbuildPlugins: [
         copy({
-            assets: {
-                from: ['./src/assets/**/*'],
-                to: ['./assets'],
-            },
+            assets: [
+                {
+                    from: ['./src/assets/**/*'],
+                    to: ['./assets']
+                },
+                {
+                    from: ['./demo/index.html'],
+                    to: ['./']
+                }
+            ]
         }),
     ],
 });
