@@ -30,10 +30,14 @@ export class IndApplication extends IndBaseComponent {
         const sidebarSlot: HTMLSlotElement = document.createElement('slot');
         sidebarSlot.name                   = 'sidebar';
 
+        const mainContents: HTMLDivElement = document.createElement('div');
+        mainContents.className             = 'main-contents';
+
         const mainSlot: HTMLSlotElement = document.createElement('slot');
+        mainContents.appendChild(mainSlot);
 
         mainContainer.appendChild(sidebarSlot)
-        mainContainer.appendChild(mainSlot);
+        mainContainer.appendChild(mainContents);
         application.appendChild(headerSlot);
         application.appendChild(mainContainer)
 
@@ -68,6 +72,13 @@ export class IndApplication extends IndBaseComponent {
         display: flex;
         height: 100vh;
         flex-direction: row;
+        overflow: hidden;
+      }
+      
+      .main-contents {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
         overflow-y: scroll;
       }
       `

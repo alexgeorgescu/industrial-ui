@@ -19,7 +19,8 @@
 
     <!-- Sidebar -->
     <div slot="sidebar">
-        <ind-sidebar items='[{"label": "About", "link": "#about"}, {"label": "Button", "link": "#button"}]'>
+        <ind-sidebar
+                items='[{"label": "About", "link": "#about"}, {"label": "Installation", "link": "#installation"}, {"label": "Button", "link": "#button"}, {"label": "Card", "link": "#card"}]'>
         </ind-sidebar>
     </div>
 
@@ -27,7 +28,20 @@
     <div class="container">
         <div id="about">
             <h2>Welcome to Industrial UI Library</h2>
-            <p>A lightweight modular UI industrial & IOT component library.</p>
+            <h4>A lightweight modular UI industrial & IOT component library:</h4>
+            <p>✅ Built using TypeScript & Web Components</p>
+            <p>✅ Lightweight, no external dependencies other than dev-dependencies</p>
+            <p>✅ Global styling and variables allow defining a consistent yet customizable look & feel</p>
+            <p>✅ Tested using vitest</p>
+            <p>✅ Each component is well documented</p>
+            <p>✅ Demo showcase (this page)</p>
+            <p></p>
+        </div>
+
+        <!-- Installation -->
+        <div id="installation">
+            <h2>Library installation:</h2>
+            <pre>// TODO: npm install industrial-ui</pre>
         </div>
 
         <!-- Button component -->
@@ -77,6 +91,59 @@
                 <ind-button variant="danger">Danger</ind-button>
             </div>
         </div>
+
+        <!-- Card component -->
+        <div id="card">
+            <h2>Card</h2>
+            <p>A customizable card web component.</p>
+            <h4>Usage:</h4>
+            <pre>&lt;ind-card&gt;Contents&lt;/ind-card&gt;</pre>
+            <h4>Attributes:</h4>
+            <table class="code">
+                <thead>
+                <tr>
+                    <th>Attribute</th>
+                    <th>Type</th>
+                    <th>Default</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>header</td>
+                    <td>slot</td>
+                    <td>undefined</td>
+                    <td>Define the header of the card</td>
+                </tr>
+                <tr>
+                    <td>footer</td>
+                    <td>slot</td>
+                    <td>undefiend</td>
+                    <td>Define the footer of the card</td>
+                </tr>
+                </tbody>
+            </table>
+            <h4>Example:</h4>
+            <pre>&lt;ind-card>
+    &lt;div slot="header"&gt;Card Header&lt;/div&gt;
+    &lt;p>Some card contents to showcase the card usage&lt;/p&gt;
+    &lt;div slot="footer"&gt;
+        &lt;ind-button variant="primary"&gt;Close&lt;/ind-button&gt;
+    &lt;/div&gt;
+&lt;/ind-card&gt;</pre>
+            <div class="d-flex py-4 g-2">
+                <ind-card>
+                    <div slot="header">Card Header</div>
+                    <p>Some card contents to showcase the card usage</p>
+                    <div slot="footer">
+                        <ind-button variant="primary">Close</ind-button>
+                    </div>
+                    <div></div>
+                </ind-card>
+            </div>
+        </div>
+
+        <div class="py-6"></div>
     </div>
 </ind-application>
 </body>

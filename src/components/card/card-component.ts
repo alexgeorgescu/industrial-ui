@@ -87,8 +87,10 @@ export class IndCard extends IndBaseComponent {
 
       .card-footer {
         display: flex;
+        flex-direction: row;
         padding: 1rem;
         border-top: 1px solid var(--border-color);
+        justify-content: end;
         gap: 0.5rem;
       }
       `
