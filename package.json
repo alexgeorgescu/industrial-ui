@@ -26,15 +26,16 @@
     "components"
   ],
   "scripts": {
-    "dev": "tsup --watch",
-    "build": "tsup",
+    "dev": "tsup --watch && copy src/assets/logo.svg dist",
+    "build": "tsup && copy src/assets/logo.svg dist",
     "lint": "tsc --noEmit",
     "test": "vitest"
   },
   "devDependencies": {
+    "esbuild-plugin-copy": "^2.1.1",
+    "happy-dom": "^20.5.0",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.18",
-    "happy-dom": "^20.5.0"
+    "vitest": "^4.0.18"
   }
 }

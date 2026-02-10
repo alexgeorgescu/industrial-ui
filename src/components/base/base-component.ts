@@ -29,8 +29,8 @@ export abstract class IndBaseComponent extends HTMLElement {
      * Helper method to create and inject styles
      */
     protected injectStyles(css: string): void {
-        const style       = document.createElement('style');
-        style.textContent = css;
+        const style: HTMLStyleElement = document.createElement('style');
+        style.textContent             = css;
         this.shadow.appendChild(style);
     }
 
@@ -52,6 +52,21 @@ export abstract class IndBaseComponent extends HTMLElement {
      */
     protected getAttr(name: string, defaultValue: string = ''): string {
         return this.getAttribute(name) || defaultValue;
+    }
+
+    /**
+     * Helper to retrieve an array of generic elements passed as an attribute.
+     */
+    protected getAttrArray<T>(name: string): T[] {
+        const attr = this.getAttribute(name) || null;
+        if (attr) {
+            try {
+                return JSON.parse(attr);
+            } catch (ex) {
+                return [];
+            }
+        }
+        return [];
     }
 
     /**

@@ -1,7 +1,7 @@
 import { IndBaseComponent } from "../base/base-component.js";
 
 /**
- * Custom Button Component
+ * IndustrialUI Button Component
  *
  * @element ind-button
  *
@@ -72,7 +72,7 @@ export class IndButton extends IndBaseComponent {
       }
       
       .btn-secondary {
-        background-color: var(--secodnary-color);
+        background-color: var(--secondary-color);
         color: var(--base-reverse-color);
       }
       

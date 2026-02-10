@@ -1,4 +1,5 @@
 import { defineConfig } from 'tsup';
+import { copy }         from 'esbuild-plugin-copy';
 
 export default defineConfig({
     entry: [
@@ -14,4 +15,12 @@ export default defineConfig({
     treeshake: true,
     external: [],         // Add any peer dependencies here
     outDir: 'dist',
+    esbuildPlugins: [
+        copy({
+            assets: {
+                from: ['./src/assets/**/*'],
+                to: ['./assets'],
+            },
+        }),
+    ],
 });
