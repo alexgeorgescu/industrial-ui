@@ -45,7 +45,6 @@ declare abstract class IndBaseComponent extends HTMLElement {
 declare class IndApplication extends IndBaseComponent {
     constructor();
     protected render(): void;
-    private attachEventListeners;
     private getStyles;
 }
 
@@ -60,6 +59,7 @@ declare class IndApplication extends IndBaseComponent {
  * @example <ind-button variant="success">I am a button</ind-button>
  */
 declare class IndButton extends IndBaseComponent {
+    private _button;
     constructor();
     static get observedAttributes(): string[];
     attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void;
@@ -78,7 +78,6 @@ declare class IndButton extends IndBaseComponent {
 declare class IndCard extends IndBaseComponent {
     constructor();
     protected render(): void;
-    private attachEventListeners;
     private getStyles;
 }
 
@@ -92,7 +91,6 @@ declare class IndCard extends IndBaseComponent {
 declare class IndHeader extends IndBaseComponent {
     constructor();
     protected render(): void;
-    private attachEventListeners;
     private getStyles;
 }
 
@@ -115,8 +113,29 @@ declare class IndSidebar extends IndBaseComponent {
     constructor();
     static get observedAttributes(): string[];
     protected render(): void;
+    private getStyles;
+}
+
+/**
+ * IndustrialUI ToggleSwitch Component
+ *
+ * @element ind-toggle-switch
+ *
+ * @attr {boolean} checked - Whether the toggle switch is checked
+ * @attr {boolean} disabled - Whether the toggle switch is disabled
+ * @attr {string} label - The label to display with the toggle switch
+ * @attr {string} variant - Toggle switch style: 'primary' | 'secondary' | 'success' | 'info' | 'warn' | 'danger' (default: 'primary')
+ *
+ * @example <ind-toggle-switch variant="info"></ind-toggle-switch>
+ */
+declare class IndToggleSwitch extends IndBaseComponent {
+    private _toggle;
+    constructor();
+    static get observedAttributes(): string[];
+    attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void;
+    protected render(): void;
     private attachEventListeners;
     private getStyles;
 }
 
-export { IndApplication, IndButton, IndCard, IndHeader, IndSidebar };
+export { IndApplication, IndButton, IndCard, IndHeader, IndSidebar, IndToggleSwitch };

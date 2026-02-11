@@ -1,4 +1,4 @@
-'use strict';var n=class extends HTMLElement{constructor(){super();this._initialized=false;this.shadow=this.attachShadow({mode:"open"});}connectedCallback(){this._initialized||(this.render(),this._initialized=true);}injectStyles(e){let o=document.createElement("style");o.textContent=e,this.shadow.appendChild(o);}emit(e,o){this.dispatchEvent(new CustomEvent(e,{detail:o,bubbles:true,composed:true}));}getAttr(e,o=""){return this.getAttribute(e)||o}getAttrArray(e){let o=this.getAttribute(e)||null;if(o)try{return JSON.parse(o)}catch{return []}return []}hasAttr(e){return this.hasAttribute(e)&&this.getAttribute(e)!=="false"}};var d=class extends n{constructor(){super(),this.attachEventListeners();}render(){this.injectStyles(this.getStyles());let t=document.createElement("div");t.className="application";let e=document.createElement("slot");e.name="header";let o=document.createElement("div");o.className="main-container";let r=document.createElement("slot");r.name="sidebar";let i=document.createElement("div");i.className="main-contents";let a=document.createElement("slot");i.appendChild(a),o.appendChild(r),o.appendChild(i),t.appendChild(e),t.appendChild(o),this.shadow.appendChild(t);}attachEventListeners(){this.addEventListener("click",t=>{console.log("Application clicked",t);});}getStyles(){return `
+'use strict';var n=class extends HTMLElement{constructor(){super();this._initialized=false;this.shadow=this.attachShadow({mode:"open"});}connectedCallback(){this._initialized||(this.render(),this._initialized=true);}injectStyles(e){let t=document.createElement("style");t.textContent=e,this.shadow.appendChild(t);}emit(e,t){this.dispatchEvent(new CustomEvent(e,{detail:t,bubbles:true,composed:true}));}getAttr(e,t=""){return this.getAttribute(e)||t}getAttrArray(e){let t=this.getAttribute(e)||null;if(t)try{return JSON.parse(t)}catch{return []}return []}hasAttr(e){return this.hasAttribute(e)&&this.getAttribute(e)!=="false"}};var d=class extends n{constructor(){super();}render(){this.injectStyles(this.getStyles());let o=document.createElement("div");o.className="application";let e=document.createElement("slot");e.name="header";let t=document.createElement("div");t.className="main-container";let i=document.createElement("slot");i.name="sidebar";let a=document.createElement("div");a.className="main-contents";let r=document.createElement("slot");a.appendChild(r),t.appendChild(i),t.appendChild(a),o.appendChild(e),o.appendChild(t),this.shadow.appendChild(o);}getStyles(){return `
       :host {
         display: flex;
         flex-direction: column;
@@ -28,7 +28,7 @@
         width: 100%;
         overflow-y: scroll;
       }
-      `}};customElements.define("ind-application",d);var l=class extends n{constructor(){super(),this.attachEventListeners();}static get observedAttributes(){return ["variant","disabled"]}attributeChangedCallback(t,e,o){t&&e!==o&&this.render();}render(){for(;this.shadow.firstChild;)this.shadow.removeChild(this.shadow.firstChild);let t=this.getAttr("variant","primary"),e=this.hasAttr("disabled");this.injectStyles(this.getStyles());let o=document.createElement("button"),r=document.createElement("slot");o.className=`btn btn-${t}`,o.appendChild(r),o.disabled=e,this.shadow.appendChild(o);}attachEventListeners(){this.addEventListener("click",t=>{console.log("Button clicked",t);});}getStyles(){return `
+      `}};customElements.define("ind-application",d);var c=class extends n{constructor(){super();}static get observedAttributes(){return ["variant","disabled"]}attributeChangedCallback(o,e,t){o&&e!==t&&this.render();}render(){for(;this.shadow.firstChild;)this.shadow.removeChild(this.shadow.firstChild);let o=this.getAttr("variant","primary"),e=this.hasAttr("disabled");this.injectStyles(this.getStyles()),this._button=document.createElement("button");let t=document.createElement("slot");this._button.className=`btn btn-${o}`,this._button.appendChild(t),this._button.disabled=e,this.shadow.appendChild(this._button),this.attachEventListeners();}attachEventListeners(){this._button&&this._button.addEventListener("click",o=>{console.log("Button clicked",o);});}getStyles(){return `
       .btn {
         display: flex;
         border: none;
@@ -41,6 +41,11 @@
         padding: 0.5rem 1rem;
       }
       
+      .btn:focus {
+        outline: 0.125rem solid var(--outline-color);
+        outline-offset: 0.125rem;
+      }
+
       .btn:disabled {
         opacity: 0.6;
         cursor: not-allowed;
@@ -99,7 +104,7 @@
       .btn-danger:hover {
         background-color: var(--danger-hover-color);
       }
-    `}};customElements.define("ind-button",l);var c=class extends n{constructor(){super(),this.attachEventListeners();}render(){this.injectStyles(this.getStyles());let t=document.createElement("div");t.className="card";let e=document.createElement("div");e.className="card-header";let o=document.createElement("slot");o.name="header",e.appendChild(o);let r=document.createElement("div");r.className="card-body";let i=document.createElement("slot");r.appendChild(i);let a=document.createElement("div");a.className="card-footer";let g=document.createElement("slot");g.name="footer",a.appendChild(g),t.appendChild(e),t.appendChild(r),t.appendChild(a),this.shadow.appendChild(t);}attachEventListeners(){this.addEventListener("click",t=>{console.log("Card clicked",t);});}getStyles(){return `
+    `}};customElements.define("ind-button",c);var m=class extends n{constructor(){super();}render(){this.injectStyles(this.getStyles());let o=document.createElement("div");o.className="card";let e=document.createElement("div");e.className="card-header";let t=document.createElement("slot");t.name="header",e.appendChild(t);let i=document.createElement("div");i.className="card-body";let a=document.createElement("slot");i.appendChild(a);let r=document.createElement("div");r.className="card-footer";let s=document.createElement("slot");s.name="footer",r.appendChild(s),o.appendChild(e),o.appendChild(i),o.appendChild(r),this.shadow.appendChild(o);}getStyles(){return `
       .card {
         display: flex;
         flex-direction: column;
@@ -137,7 +142,7 @@
         justify-content: end;
         gap: 0.5rem;
       }
-      `}};customElements.define("ind-card",c);var m=class extends n{constructor(){super(),this.attachEventListeners();}render(){this.injectStyles(this.getStyles());let t=document.createElement("div");t.className="header";let e=document.createElement("slot");t.appendChild(e),this.shadow.appendChild(t);}attachEventListeners(){this.addEventListener("click",t=>{console.log("Header clicked",t);});}getStyles(){return `
+      `}};customElements.define("ind-card",m);var p=class extends n{constructor(){super();}render(){this.injectStyles(this.getStyles());let o=document.createElement("div");o.className="header";let e=document.createElement("slot");o.appendChild(e),this.shadow.appendChild(o);}getStyles(){return `
       .header {
         display: flex;
         flex-direction: row;
@@ -150,7 +155,7 @@
         border-radius: 0rem;
         border-bottom: 1px solid var(--border-color);
       }
-      `}};customElements.define("ind-header",m);var p=class extends n{constructor(){super();this._items=[];this.attachEventListeners();}static get observedAttributes(){return ["items"]}render(){this._items=this.getAttrArray("items"),this.injectStyles(this.getStyles());let e=document.createElement("div");e.className="sidebar";let o=document.createElement("ul");this._items.map(r=>{let i=document.createElement("li"),a=document.createElement("a");a.href=r.link,a.innerText=r.label,i.appendChild(a),o.appendChild(i);}),e.appendChild(o),this.shadow.appendChild(e);}attachEventListeners(){this.addEventListener("click",e=>{console.log("Sidebar clicked",e);});}getStyles(){return `
+      `}};customElements.define("ind-header",p);var h=class extends n{constructor(){super();this._items=[];}static get observedAttributes(){return ["items"]}render(){this._items=this.getAttrArray("items"),this.injectStyles(this.getStyles());let e=document.createElement("div");e.className="sidebar";let t=document.createElement("ul");this._items.map(i=>{let a=document.createElement("li"),r=document.createElement("a");r.href=i.link,r.innerText=i.label,a.appendChild(r),t.appendChild(a);}),e.appendChild(t),this.shadow.appendChild(e);}getStyles(){return `
       .sidebar {
         display: flex;
         flex-direction: row;
@@ -183,5 +188,106 @@
       .sidebar a:hover {
         background: var(--secondary-color);
       }
-      `}};customElements.define("ind-sidebar",p);exports.IndApplication=d;exports.IndButton=l;exports.IndCard=c;exports.IndHeader=m;exports.IndSidebar=p;//# sourceMappingURL=index.cjs.map
+      `}};customElements.define("ind-sidebar",h);var g=class extends n{constructor(){super();}static get observedAttributes(){return ["checked","disabled","label","variant"]}attributeChangedCallback(o,e,t){o&&e!==t&&this.render();}render(){for(;this.shadow.firstChild;)this.shadow.removeChild(this.shadow.firstChild);let o=this.getAttr("checked","false")==="true",e=this.hasAttr("disabled"),t=this.getAttr("label",""),i=this.getAttr("variant","primary");this.injectStyles(this.getStyles()),this._toggle=document.createElement("input"),this._toggle.type="checkbox",this._toggle.checked=o,this._toggle.disabled=e;let a=document.createElement("span");a.className=`slider  ${i}`;let r=document.createElement("label");r.className="switch",r.appendChild(this._toggle),r.appendChild(a);let s=document.createElement("div");if(s.className="container",s.appendChild(r),t){let b=document.createElement("span");b.className="label",b.textContent=t,s.appendChild(b);}this.shadow.appendChild(s),this.attachEventListeners();}attachEventListeners(){this._toggle&&this._toggle.addEventListener("change",o=>{console.log("Toggle switch changed",o);});}getStyles(){return `
+      :host {
+        display: inline-block;
+        font-family: var(--font-sans);
+      }
+
+      .container {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 48px;
+        height: 26px;
+        cursor: pointer;
+      }
+
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--neutral-background-color);
+        transition: 0.3s;
+        border-radius: 2.5rem;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 1.25rem;
+        width: 1.25rem;
+        left: 0.188rem;
+        bottom: 0.188rem;
+        background-color: white;
+        transition: 0.3s;
+        border-radius: 50%;
+      }
+
+      input:checked +.slider.primary {
+        background-color: var(--primary-color);
+      }
+      
+      input:checked +.slider.secondary {
+        background-color: var(--secondary-color);
+      }
+      
+      input:checked +.slider.success {
+        background-color: var(--success-color);
+      }
+      
+      input:checked +.slider.info {
+        background-color: var(--info-color);
+      }
+      
+      input:checked +.slider.warn {
+        background-color: var(--warn-color);
+      }
+      
+      input:checked +.slider.danger {
+        background-color: var(--danger-color);
+      }
+
+      input:focus + .slider {
+        outline: 0.125rem solid var(--outline-color);
+        outline-offset: 0.125rem;
+      }
+
+      input:checked + .slider:before {
+        transform: translateX(1.375rem);
+      }
+
+      input:disabled + .slider {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .switch:has(input:disabled) {
+        cursor: not-allowed;
+      }
+
+      .label {
+        font-size: var(--font-size-sm);
+        color: #333;
+        user-select: none;
+      }
+
+      :host([disabled]) .label {
+        color: #999;
+      }
+    `}};customElements.define("ind-toggle-switch",g);exports.IndApplication=d;exports.IndButton=c;exports.IndCard=m;exports.IndHeader=p;exports.IndSidebar=h;exports.IndToggleSwitch=g;//# sourceMappingURL=index.cjs.map
 //# sourceMappingURL=index.cjs.map

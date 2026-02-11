@@ -20,7 +20,7 @@
     <!-- Sidebar -->
     <div slot="sidebar">
         <ind-sidebar
-                items='[{"label": "About", "link": "#about"}, {"label": "Installation", "link": "#installation"}, {"label": "Button", "link": "#button"}, {"label": "Card", "link": "#card"}]'>
+                items='[{"label": "About", "link": "#about"}, {"label": "Installation", "link": "#installation"}, {"label": "Button", "link": "#button"}, {"label": "Card", "link": "#card"}, {"label": "ToggleSwitch", "link": "#toggle-switch"}]'>
         </ind-sidebar>
     </div>
 
@@ -140,6 +140,69 @@
                     </div>
                     <div></div>
                 </ind-card>
+            </div>
+        </div>
+
+        <!-- Toggle Switch component -->
+        <div id="toggle-switch">
+            <h2>ToggleSwitch</h2>
+            <p>A customizable toggle switch web component.</p>
+            <h4>Usage:</h4>
+            <pre>&lt;ind-toggle-switch&gt;&lt;/ind-toggle-switch&gt;</pre>
+            <h4>Attributes:</h4>
+            <table class="code">
+                <thead>
+                <tr>
+                    <th>Attribute</th>
+                    <th>Type</th>
+                    <th>Default</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>checked</td>
+                    <td>boolean</td>
+                    <td>false</td>
+                    <td>Whether the toggle switch is checked</td>
+                </tr>
+                <tr>
+                    <td>disabled</td>
+                    <td>boolean</td>
+                    <td>false</td>
+                    <td>Disables the toggle switch</td>
+                </tr>
+                <tr>
+                    <td>label</td>
+                    <td>string</td>
+                    <td>undefined</td>
+                    <td>Define the text label</td>
+                </tr>
+                <tr>
+                    <td>variant</td>
+                    <td>string</td>
+                    <td>"primary"</td>
+                    <td>Toggle switch style variant. One of: primary, secondary, success, info, warn, danger</td>
+                </tr>
+                </tbody>
+            </table>
+            <h4>Example:</h4>
+            <pre>&lt;ind-toggle-switch checked="true"&gt;&lt;/ind-toggle-switch&gt;
+&lt;ind-toggle-switch checked="true" variant="secondary"&gt;&lt;/ind-toggle-switch&gt;
+&lt;ind-toggle-switch checked="true" variant="success"&gt;&lt;/ind-toggle-switch&gt;
+&lt;ind-toggle-switch checked="true" variant="info"&gt;&lt;/ind-toggle-switch&gt;
+&lt;ind-toggle-switch checked="true" variant="warn"&gt;&lt;/ind-toggle-switch&gt;
+&lt;ind-toggle-switch checked="true" variant="danger"&gt;&lt;/ind-toggle-switch&gt;
+
+&lt;ind-toggle-switch checked="true" label="Label"&gt;&lt;/ind-toggle-switch&gt;</pre>
+            <div class="d-flex py-4 g-2">
+                <ind-toggle-switch checked="true"></ind-toggle-switch>
+                <ind-toggle-switch checked="true" variant="secondary"></ind-toggle-switch>
+                <ind-toggle-switch checked="true" variant="success"></ind-toggle-switch>
+                <ind-toggle-switch checked="true" variant="info"></ind-toggle-switch>
+                <ind-toggle-switch checked="true" variant="warn"></ind-toggle-switch>
+                <ind-toggle-switch checked="true" variant="danger"></ind-toggle-switch>
+                <ind-toggle-switch checked="true" label="Label"></ind-toggle-switch>
             </div>
         </div>
 
