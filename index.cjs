@@ -1,4 +1,4 @@
-'use strict';var n=class extends HTMLElement{constructor(){super();this._initialized=false;this.shadow=this.attachShadow({mode:"open"});}connectedCallback(){this._initialized||(this.render(),this._initialized=true);}injectStyles(e){let t=document.createElement("style");t.textContent=e,this.shadow.appendChild(t);}emit(e,t){this.dispatchEvent(new CustomEvent(e,{detail:t,bubbles:true,composed:true}));}getAttr(e,t=""){return this.getAttribute(e)||t}getAttrArray(e){let t=this.getAttribute(e)||null;if(t)try{return JSON.parse(t)}catch{return []}return []}hasAttr(e){return this.hasAttribute(e)&&this.getAttribute(e)!=="false"}};var d=class extends n{constructor(){super();}render(){this.injectStyles(this.getStyles());let o=document.createElement("div");o.className="application";let e=document.createElement("slot");e.name="header";let t=document.createElement("div");t.className="main-container";let i=document.createElement("slot");i.name="sidebar";let a=document.createElement("div");a.className="main-contents";let r=document.createElement("slot");a.appendChild(r),t.appendChild(i),t.appendChild(a),o.appendChild(e),o.appendChild(t),this.shadow.appendChild(o);}getStyles(){return `
+'use strict';var n=class extends HTMLElement{constructor(){super();this._initialized=false;this.shadow=this.attachShadow({mode:"open"});}connectedCallback(){this._initialized||(this.render(),this._initialized=true);}cleanShadow(){for(;this.shadow.firstChild;)this.shadow.removeChild(this.shadow.firstChild);}injectStyles(t){let o=document.createElement("style");o.textContent=t,this.shadow.appendChild(o);}emit(t,o){this.dispatchEvent(new CustomEvent(t,{detail:o,bubbles:true,composed:true}));}getAttr(t,o=""){return this.getAttribute(t)||o}getAttrArray(t){let o=this.getAttribute(t)||null;if(o)try{return JSON.parse(o)}catch{return []}return []}hasAttr(t){return this.hasAttribute(t)&&this.getAttribute(t)!=="false"}};var d=class extends n{constructor(){super();}render(){this.injectStyles(this.getStyles());let e=document.createElement("div");e.className="application";let t=document.createElement("slot");t.name="header";let o=document.createElement("div");o.className="main-container";let i=document.createElement("slot");i.name="sidebar";let a=document.createElement("div");a.className="main-contents";let r=document.createElement("slot");a.appendChild(r),o.appendChild(i),o.appendChild(a),e.appendChild(t),e.appendChild(o),this.shadow.appendChild(e);}getStyles(){return `
       :host {
         display: flex;
         flex-direction: column;
@@ -28,7 +28,7 @@
         width: 100%;
         overflow-y: scroll;
       }
-      `}};customElements.define("ind-application",d);var c=class extends n{constructor(){super();}static get observedAttributes(){return ["variant","disabled"]}attributeChangedCallback(o,e,t){o&&e!==t&&this.render();}render(){for(;this.shadow.firstChild;)this.shadow.removeChild(this.shadow.firstChild);let o=this.getAttr("variant","primary"),e=this.hasAttr("disabled");this.injectStyles(this.getStyles()),this._button=document.createElement("button");let t=document.createElement("slot");this._button.className=`btn btn-${o}`,this._button.appendChild(t),this._button.disabled=e,this.shadow.appendChild(this._button),this.attachEventListeners();}attachEventListeners(){this._button&&this._button.addEventListener("click",o=>{console.log("Button clicked",o);});}getStyles(){return `
+      `}};customElements.define("ind-application",d);var c=class extends n{constructor(){super();}isDisabled(){return this._button?this._button.disabled:false}setDisabled(e){this._button&&(this._button.disabled=e);}static get observedAttributes(){return ["disabled","variant"]}attributeChangedCallback(e,t,o){e&&t!==o&&this.render();}render(){this.cleanShadow();let e=this.hasAttr("disabled"),t=this.getAttr("variant","primary");this.injectStyles(this.getStyles()),this._button=document.createElement("button");let o=document.createElement("slot");this._button.className=`btn btn-${t}`,this._button.appendChild(o),this._button.disabled=e,this.shadow.appendChild(this._button),this.attachEventListeners();}attachEventListeners(){this._button&&this._button.addEventListener("click",e=>{this.dispatchEvent(new CustomEvent("button-click-event",{detail:{originalEvent:e},bubbles:true,composed:true}));});}getStyles(){return `
       .btn {
         display: flex;
         border: none;
@@ -104,7 +104,7 @@
       .btn-danger:hover {
         background-color: var(--danger-hover-color);
       }
-    `}};customElements.define("ind-button",c);var m=class extends n{constructor(){super();}render(){this.injectStyles(this.getStyles());let o=document.createElement("div");o.className="card";let e=document.createElement("div");e.className="card-header";let t=document.createElement("slot");t.name="header",e.appendChild(t);let i=document.createElement("div");i.className="card-body";let a=document.createElement("slot");i.appendChild(a);let r=document.createElement("div");r.className="card-footer";let s=document.createElement("slot");s.name="footer",r.appendChild(s),o.appendChild(e),o.appendChild(i),o.appendChild(r),this.shadow.appendChild(o);}getStyles(){return `
+    `}};customElements.define("ind-button",c);var m=class extends n{constructor(){super();}render(){this.injectStyles(this.getStyles());let e=document.createElement("div");e.className="card";let t=document.createElement("div");t.className="card-header";let o=document.createElement("slot");o.name="header",t.appendChild(o);let i=document.createElement("div");i.className="card-body";let a=document.createElement("slot");i.appendChild(a);let r=document.createElement("div");r.className="card-footer";let s=document.createElement("slot");s.name="footer",r.appendChild(s),e.appendChild(t),e.appendChild(i),e.appendChild(r),this.shadow.appendChild(e);}getStyles(){return `
       .card {
         display: flex;
         flex-direction: column;
@@ -142,7 +142,7 @@
         justify-content: end;
         gap: 0.5rem;
       }
-      `}};customElements.define("ind-card",m);var p=class extends n{constructor(){super();}render(){this.injectStyles(this.getStyles());let o=document.createElement("div");o.className="header";let e=document.createElement("slot");o.appendChild(e),this.shadow.appendChild(o);}getStyles(){return `
+      `}};customElements.define("ind-card",m);var p=class extends n{constructor(){super();}render(){this.injectStyles(this.getStyles());let e=document.createElement("div");e.className="header";let t=document.createElement("slot");e.appendChild(t),this.shadow.appendChild(e);}getStyles(){return `
       .header {
         display: flex;
         flex-direction: row;
@@ -155,7 +155,7 @@
         border-radius: 0rem;
         border-bottom: 1px solid var(--border-color);
       }
-      `}};customElements.define("ind-header",p);var h=class extends n{constructor(){super();this._items=[];}static get observedAttributes(){return ["items"]}render(){this._items=this.getAttrArray("items"),this.injectStyles(this.getStyles());let e=document.createElement("div");e.className="sidebar";let t=document.createElement("ul");this._items.map(i=>{let a=document.createElement("li"),r=document.createElement("a");r.href=i.link,r.innerText=i.label,a.appendChild(r),t.appendChild(a);}),e.appendChild(t),this.shadow.appendChild(e);}getStyles(){return `
+      `}};customElements.define("ind-header",p);var g=class extends n{constructor(){super();this._items=[];}static get observedAttributes(){return ["items"]}render(){this._items=this.getAttrArray("items"),this.injectStyles(this.getStyles());let t=document.createElement("div");t.className="sidebar";let o=document.createElement("ul");this._items.map(i=>{let a=document.createElement("li"),r=document.createElement("a");r.href=i.link,r.innerText=i.label,a.appendChild(r),o.appendChild(a);}),t.appendChild(o),this.shadow.appendChild(t);}getStyles(){return `
       .sidebar {
         display: flex;
         flex-direction: row;
@@ -182,13 +182,14 @@
         display: block;
         color: var(--base-text-color);
         text-decoration: none;
+        font-size: var(--text-base);
         padding: 0.5rem 1rem;
       }
       
       .sidebar a:hover {
         background: var(--secondary-color);
       }
-      `}};customElements.define("ind-sidebar",h);var g=class extends n{constructor(){super();}static get observedAttributes(){return ["checked","disabled","label","variant"]}attributeChangedCallback(o,e,t){o&&e!==t&&this.render();}render(){for(;this.shadow.firstChild;)this.shadow.removeChild(this.shadow.firstChild);let o=this.getAttr("checked","false")==="true",e=this.hasAttr("disabled"),t=this.getAttr("label",""),i=this.getAttr("variant","primary");this.injectStyles(this.getStyles()),this._toggle=document.createElement("input"),this._toggle.type="checkbox",this._toggle.checked=o,this._toggle.disabled=e;let a=document.createElement("span");a.className=`slider  ${i}`;let r=document.createElement("label");r.className="switch",r.appendChild(this._toggle),r.appendChild(a);let s=document.createElement("div");if(s.className="container",s.appendChild(r),t){let b=document.createElement("span");b.className="label",b.textContent=t,s.appendChild(b);}this.shadow.appendChild(s),this.attachEventListeners();}attachEventListeners(){this._toggle&&this._toggle.addEventListener("change",o=>{console.log("Toggle switch changed",o);});}getStyles(){return `
+      `}};customElements.define("ind-sidebar",g);var h=class extends n{constructor(){super();}isChecked(){return this._toggle?this._toggle.checked:false}isDisabled(){return this._toggle?this._toggle.disabled:false}setChecked(e){this._toggle&&(this._toggle.checked=e);}setDisabled(e){this._toggle&&(this._toggle.disabled=e);}static get observedAttributes(){return ["checked","disabled","label","variant"]}attributeChangedCallback(e,t,o){e&&t!==o&&this.render();}render(){this.cleanShadow();let e=this.getAttr("checked","false")==="true",t=this.hasAttr("disabled"),o=this.getAttr("label",""),i=this.getAttr("variant","primary");this.injectStyles(this.getStyles()),this._toggle=document.createElement("input"),this._toggle.type="checkbox",this._toggle.checked=e,this._toggle.disabled=t;let a=document.createElement("span");a.className=`slider  ${i}`;let r=document.createElement("label");r.className="switch",r.appendChild(this._toggle),r.appendChild(a);let s=document.createElement("div");if(s.className="container",s.appendChild(r),o){let b=document.createElement("span");b.className="label",b.textContent=o,s.appendChild(b);}this.shadow.appendChild(s),this.attachEventListeners();}attachEventListeners(){this._toggle&&this._toggle.addEventListener("change",e=>{this.dispatchEvent(new CustomEvent("toggle-switch-toggled",{detail:{originalEvent:e},bubbles:true,composed:true}));});}getStyles(){return `
       :host {
         display: inline-block;
         font-family: var(--font-sans);
@@ -246,6 +247,10 @@
         background-color: var(--secondary-color);
       }
       
+      .slider.secondary:before {
+        background: var(--secondary-reverse-color);
+      }
+      
       input:checked +.slider.success {
         background-color: var(--success-color);
       }
@@ -289,5 +294,5 @@
       :host([disabled]) .label {
         color: #999;
       }
-    `}};customElements.define("ind-toggle-switch",g);exports.IndApplication=d;exports.IndButton=c;exports.IndCard=m;exports.IndHeader=p;exports.IndSidebar=h;exports.IndToggleSwitch=g;//# sourceMappingURL=index.cjs.map
+    `}};customElements.define("ind-toggle-switch",h);exports.IndApplication=d;exports.IndButton=c;exports.IndCard=m;exports.IndHeader=p;exports.IndSidebar=g;exports.IndToggleSwitch=h;//# sourceMappingURL=index.cjs.map
 //# sourceMappingURL=index.cjs.map

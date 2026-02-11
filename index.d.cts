@@ -14,6 +14,10 @@ declare abstract class IndBaseComponent extends HTMLElement {
      */
     protected abstract render(): void;
     /**
+     * Cleanup the shadow DOM.
+     */
+    protected cleanShadow(): void;
+    /**
      * Helper method to create and inject styles
      */
     protected injectStyles(css: string): void;
@@ -53,14 +57,16 @@ declare class IndApplication extends IndBaseComponent {
  *
  * @element ind-button
  *
- * @attr {string} variant - Button style: 'primary' | 'secondary' | 'success' | 'info' | 'warn' | 'danger' (default: 'primary')
  * @attr {boolean} disabled - Whether the button is disabled
+ * @attr {string} variant - Button style: 'primary' | 'secondary' | 'success' | 'info' | 'warn' | 'danger' (default: 'primary')
  *
  * @example <ind-button variant="success">I am a button</ind-button>
  */
 declare class IndButton extends IndBaseComponent {
     private _button;
     constructor();
+    isDisabled(): boolean;
+    setDisabled(value: boolean): void;
     static get observedAttributes(): string[];
     attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void;
     protected render(): void;
@@ -131,6 +137,10 @@ declare class IndSidebar extends IndBaseComponent {
 declare class IndToggleSwitch extends IndBaseComponent {
     private _toggle;
     constructor();
+    isChecked(): boolean;
+    isDisabled(): boolean;
+    setChecked(value: boolean): void;
+    setDisabled(value: boolean): void;
     static get observedAttributes(): string[];
     attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void;
     protected render(): void;

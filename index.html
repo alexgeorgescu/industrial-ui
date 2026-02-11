@@ -76,20 +76,36 @@
                 </tr>
                 </tbody>
             </table>
-            <h4>Example:</h4>
-            <pre>&lt;ind-button variant="primary"&gt;Primary&lt;/ind-button&gt;
+
+            <h4>Public API:</h4>
+            <pre>isDisabled(): boolean {...}
+setDisabled(value: boolean): void {...}</pre>
+            <h4>Events:</h4>
+            <pre>A CustomEvent of type "button-click-event" is triggered when the native event 'click' is called</pre>
+
+            <h4>Examples:</h4>
+            <div class="presentation">
+                <h5>Basic Button</h5>
+                <ind-button>Button</ind-button>
+                <pre>&lt;ind-button&gt;Button&lt;/ind-button&gt;</pre>
+            </div>
+
+            <div class="presentation">
+                <h5>Variants</h5>
+                <div class="d-flex g-2">
+                    <ind-button variant="primary">Primary</ind-button>
+                    <ind-button variant="secondary">Secondary</ind-button>
+                    <ind-button variant="success">Success</ind-button>
+                    <ind-button variant="info">Info</ind-button>
+                    <ind-button variant="warn">Warn</ind-button>
+                    <ind-button variant="danger">Danger</ind-button>
+                </div>
+                <pre>&lt;ind-button variant="primary"&gt;Primary&lt;/ind-button&gt;
 &lt;ind-button variant="secondary"&gt;Secondary&lt;/ind-button&gt;
 &lt;ind-button variant="success"&gt;Success&lt;/ind-button&gt;
 &lt;ind-button variant="info"&gt;Info&lt;/ind-button&gt;
 &lt;ind-button variant="warn"&gt;Warn&lt;/ind-button&gt;
 &lt;ind-button variant="danger"&gt;Danger&lt;/ind-button&gt;</pre>
-            <div class="d-flex py-4 g-2">
-                <ind-button variant="primary">Primary</ind-button>
-                <ind-button variant="secondary">Secondary</ind-button>
-                <ind-button variant="success">Success</ind-button>
-                <ind-button variant="info">Info</ind-button>
-                <ind-button variant="warn">Warn</ind-button>
-                <ind-button variant="danger">Danger</ind-button>
             </div>
         </div>
 
@@ -187,23 +203,70 @@
                 </tr>
                 </tbody>
             </table>
-            <h4>Example:</h4>
-            <pre>&lt;ind-toggle-switch checked="true"&gt;&lt;/ind-toggle-switch&gt;
+
+            <h4>Public API:</h4>
+            <pre>isChecked(): boolean {...}
+isDisabled(): boolean {...}
+setChecked(value: boolean): void {...}
+setDisabled(value: boolean): void {...}</pre>
+            <h4>Events:</h4>
+            <pre>A CustomEvent of type "toggle-switch-toggled" is triggered when the native event 'change' is called</pre>
+
+            <h4>Examples:</h4>
+            <div class="presentation">
+                <h5>Basic Toggle</h5>
+                <ind-toggle-switch></ind-toggle-switch>
+                <pre>&lt;ind-toggle-switch&gt;&lt;/ind-toggle-switch&gt;</pre>
+            </div>
+
+            <div class="presentation">
+                <h5>Basic Toggle Checked</h5>
+                <ind-toggle-switch checked="true"></ind-toggle-switch>
+                <pre>&lt;ind-toggle-switch checked="true"&gt;&lt;/ind-toggle-switch&gt;</pre>
+            </div>
+
+            <div class="presentation">
+                <h5>Disabled State</h5>
+                <ind-toggle-switch checked="true" disabled="true"></ind-toggle-switch>
+                <pre>&lt;ind-toggle-switch checked="true" disabled="true"&gt;&lt;/ind-toggle-switch&gt;</pre>
+            </div>
+
+            <div class="presentation">
+                <h5>With Label</h5>
+                <ind-toggle-switch label="Toggle me!"></ind-toggle-switch>
+                <pre>&lt;ind-toggle-switch label="Toggle me!"&gt;&lt;/ind-toggle-switch&gt;</pre>
+            </div>
+
+            <div class="presentation">
+                <h5>Toggle Programmatically</h5>
+                <ind-toggle-switch id="test-switch"></ind-toggle-switch>
+                <ind-button id="test-switch-button">Toggle state</ind-button>
+                <script>
+                    const toggleSwitch = document.getElementById('test-switch');
+                    const toggleButton = document.getElementById('test-switch-button');
+                    toggleButton.addEventListener('button-click-event', () => {
+                        toggleSwitch.setChecked(!toggleSwitch.isChecked());
+                    });
+                </script>
+                <pre>&lt;ind-toggle-switch label="Toggle me!"&gt;&lt;/ind-toggle-switch&gt;</pre>
+            </div>
+
+            <div class="presentation">
+                <h5>Variants</h5>
+                <div class="d-flex g-2">
+                    <ind-toggle-switch checked="true"></ind-toggle-switch>
+                    <ind-toggle-switch checked="true" variant="secondary"></ind-toggle-switch>
+                    <ind-toggle-switch checked="true" variant="success"></ind-toggle-switch>
+                    <ind-toggle-switch checked="true" variant="info"></ind-toggle-switch>
+                    <ind-toggle-switch checked="true" variant="warn"></ind-toggle-switch>
+                    <ind-toggle-switch checked="true" variant="danger"></ind-toggle-switch>
+                </div>
+                <pre>&lt;ind-toggle-switch checked="true"&gt;&lt;/ind-toggle-switch&gt;
 &lt;ind-toggle-switch checked="true" variant="secondary"&gt;&lt;/ind-toggle-switch&gt;
 &lt;ind-toggle-switch checked="true" variant="success"&gt;&lt;/ind-toggle-switch&gt;
 &lt;ind-toggle-switch checked="true" variant="info"&gt;&lt;/ind-toggle-switch&gt;
 &lt;ind-toggle-switch checked="true" variant="warn"&gt;&lt;/ind-toggle-switch&gt;
-&lt;ind-toggle-switch checked="true" variant="danger"&gt;&lt;/ind-toggle-switch&gt;
-
-&lt;ind-toggle-switch checked="true" label="Label"&gt;&lt;/ind-toggle-switch&gt;</pre>
-            <div class="d-flex py-4 g-2">
-                <ind-toggle-switch checked="true"></ind-toggle-switch>
-                <ind-toggle-switch checked="true" variant="secondary"></ind-toggle-switch>
-                <ind-toggle-switch checked="true" variant="success"></ind-toggle-switch>
-                <ind-toggle-switch checked="true" variant="info"></ind-toggle-switch>
-                <ind-toggle-switch checked="true" variant="warn"></ind-toggle-switch>
-                <ind-toggle-switch checked="true" variant="danger"></ind-toggle-switch>
-                <ind-toggle-switch checked="true" label="Label"></ind-toggle-switch>
+&lt;ind-toggle-switch checked="true" variant="danger"&gt;&lt;/ind-toggle-switch&gt;</pre>
             </div>
         </div>
 
