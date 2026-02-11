@@ -11,7 +11,6 @@ export class IndApplication extends IndBaseComponent {
 
     constructor() {
         super();
-        this.attachEventListeners();
     }
 
     protected render(): void {
@@ -42,12 +41,6 @@ export class IndApplication extends IndBaseComponent {
         application.appendChild(mainContainer)
 
         this.shadow.appendChild(application);
-    }
-
-    private attachEventListeners(): void {
-        this.addEventListener('click', (e) => {
-            console.log('Application clicked', e);
-        });
     }
 
     private getStyles(): string {

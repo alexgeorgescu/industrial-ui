@@ -11,7 +11,6 @@ export class IndHeader extends IndBaseComponent {
 
     constructor() {
         super();
-        this.attachEventListeners();
     }
 
     protected render(): void {
@@ -25,12 +24,6 @@ export class IndHeader extends IndBaseComponent {
         header.appendChild(headerSlot);
 
         this.shadow.appendChild(header);
-    }
-
-    private attachEventListeners(): void {
-        this.addEventListener('click', (e) => {
-            console.log('Header clicked', e);
-        });
     }
 
     private getStyles(): string {

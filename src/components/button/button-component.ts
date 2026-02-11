@@ -12,9 +12,10 @@ import { IndBaseComponent } from "../base/base-component.js";
  */
 export class IndButton extends IndBaseComponent {
 
+    private _button: HTMLButtonElement | undefined;
+
     constructor() {
         super();
-        this.attachEventListeners();
     }
 
     static get observedAttributes() {
@@ -37,20 +38,25 @@ export class IndButton extends IndBaseComponent {
 
         this.injectStyles(this.getStyles());
 
-        const button: HTMLButtonElement = document.createElement('button');
-        const slot: HTMLSlotElement     = document.createElement('slot');
+        this._button                = document.createElement('button');
+        const slot: HTMLSlotElement = document.createElement('slot');
 
-        button.className = `btn btn-${variant}`;
-        button.appendChild(slot);
-        button.disabled = disabled;
+        this._button.className = `btn btn-${variant}`;
+        this._button.appendChild(slot);
+        this._button.disabled = disabled;
 
-        this.shadow.appendChild(button);
+        this.shadow.appendChild(this._button);
+
+        // Attach event listeners
+        this.attachEventListeners();
     }
 
     private attachEventListeners(): void {
-        this.addEventListener('click', (e) => {
-            console.log('Button clicked', e);
-        });
+        if (this._button) {
+            this._button.addEventListener('click', (e) => {
+                console.log('Button clicked', e);
+            });
+        }
     }
 
     private getStyles(): string {
@@ -67,6 +73,11 @@ export class IndButton extends IndBaseComponent {
         padding: 0.5rem 1rem;
       }
       
+      .btn:focus {
+        outline: 0.125rem solid var(--outline-color);
+        outline-offset: 0.125rem;
+      }
+
       .btn:disabled {
         opacity: 0.6;
         cursor: not-allowed;

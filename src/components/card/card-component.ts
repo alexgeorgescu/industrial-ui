@@ -11,7 +11,6 @@ export class IndCard extends IndBaseComponent {
 
     constructor() {
         super();
-        this.attachEventListeners();
     }
 
     protected render(): void {
@@ -46,12 +45,6 @@ export class IndCard extends IndBaseComponent {
         card.appendChild(footer);
 
         this.shadow.appendChild(card);
-    }
-
-    private attachEventListeners(): void {
-        this.addEventListener('click', (e) => {
-            console.log('Card clicked', e);
-        });
     }
 
     private getStyles(): string {

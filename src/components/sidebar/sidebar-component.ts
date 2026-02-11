@@ -14,7 +14,6 @@ export class IndSidebar extends IndBaseComponent {
 
     constructor() {
         super();
-        this.attachEventListeners();
     }
 
     static get observedAttributes() {
@@ -42,12 +41,6 @@ export class IndSidebar extends IndBaseComponent {
         sidebar.appendChild(ul);
 
         this.shadow.appendChild(sidebar);
-    }
-
-    private attachEventListeners(): void {
-        this.addEventListener('click', (e) => {
-            console.log('Sidebar clicked', e);
-        });
     }
 
     private getStyles(): string {
