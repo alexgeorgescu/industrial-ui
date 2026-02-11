@@ -20,6 +20,20 @@ export class IndToggleSwitch extends IndBaseComponent {
         super();
     }
 
+    // Public API
+
+    /* Check if the toggle switch is checked or not */
+    isChecked(): boolean { return this._toggle ? this._toggle.checked : false; }
+
+    /* Check if the toggle switch is disabled or not */
+    isDisabled(): boolean { return this._toggle ? this._toggle.disabled : false; }
+
+    /* Check or uncheck the toggle switch */
+    setChecked(value: boolean): void { this._toggle && (this._toggle.checked = value); }
+
+    /* Enable or disable the toggle switch */
+    setDisabled(value: boolean): void { this._toggle && (this._toggle.disabled = value); }
+
     static get observedAttributes() {
         return ['checked', 'disabled', 'label', 'variant'];
     }
@@ -31,10 +45,8 @@ export class IndToggleSwitch extends IndBaseComponent {
     }
 
     protected render(): void {
-        // Clear shadow DOM before rendering
-        while (this.shadow.firstChild) {
-            this.shadow.removeChild(this.shadow.firstChild);
-        }
+        this.cleanShadow();
+
         const checked: boolean  = this.getAttr('checked', 'false') === 'true';
         const disabled: boolean = this.hasAttr('disabled');
         const label: string     = this.getAttr('label', '');
@@ -60,11 +72,11 @@ export class IndToggleSwitch extends IndBaseComponent {
         container.className             = 'container';
         container.appendChild(switchElement);
 
-        // Setup the toggle switch label if any
+        // Set the toggle switch label if any
         if (label) {
             const text: HTMLSpanElement = document.createElement('span');
             text.className              = 'label';
-            text.textContent = label;
+            text.textContent            = label;
             container.appendChild(text);
         }
 
@@ -77,7 +89,11 @@ export class IndToggleSwitch extends IndBaseComponent {
     private attachEventListeners(): void {
         if (this._toggle) {
             this._toggle.addEventListener('change', (e) => {
-                console.log('Toggle switch changed', e);
+                this.dispatchEvent(new CustomEvent('toggle-switch-toggled', {
+                    detail: {originalEvent: e},
+                    bubbles: true,
+                    composed: true
+                }));
             });
         }
     }
@@ -139,6 +155,10 @@ export class IndToggleSwitch extends IndBaseComponent {
       
       input:checked +.slider.secondary {
         background-color: var(--secondary-color);
+      }
+      
+      .slider.secondary:before {
+        background: var(--secondary-reverse-color);
       }
       
       input:checked +.slider.success {

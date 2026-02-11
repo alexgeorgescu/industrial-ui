@@ -71,6 +71,7 @@ export class IndSidebar extends IndBaseComponent {
         display: block;
         color: var(--base-text-color);
         text-decoration: none;
+        font-size: var(--text-base);
         padding: 0.5rem 1rem;
       }
       

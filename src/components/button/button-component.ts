@@ -5,8 +5,8 @@ import { IndBaseComponent } from "../base/base-component.js";
  *
  * @element ind-button
  *
- * @attr {string} variant - Button style: 'primary' | 'secondary' | 'success' | 'info' | 'warn' | 'danger' (default: 'primary')
  * @attr {boolean} disabled - Whether the button is disabled
+ * @attr {string} variant - Button style: 'primary' | 'secondary' | 'success' | 'info' | 'warn' | 'danger' (default: 'primary')
  *
  * @example <ind-button variant="success">I am a button</ind-button>
  */
@@ -18,8 +18,16 @@ export class IndButton extends IndBaseComponent {
         super();
     }
 
+    // Public API
+
+    /* Check if the toggle switch is disabled or not */
+    isDisabled(): boolean { return this._button ? this._button.disabled : false; }
+
+    /* Enable or disable the toggle switch */
+    setDisabled(value: boolean): void { this._button && (this._button.disabled = value); }
+
     static get observedAttributes() {
-        return ['variant', 'disabled'];
+        return ['disabled', 'variant'];
     }
 
     attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null) {
@@ -29,12 +37,11 @@ export class IndButton extends IndBaseComponent {
     }
 
     protected render(): void {
-        // Clear shadow DOM before rendering
-        while (this.shadow.firstChild) {
-            this.shadow.removeChild(this.shadow.firstChild);
-        }
+        this.cleanShadow();
+
+        const disabled: boolean = this.hasAttr('disabled');
+
         const variant: string | 'primary' | 'secondary' | 'success' | 'info' | 'warn' | 'danger' = this.getAttr('variant', 'primary');
-        const disabled: boolean                                                                  = this.hasAttr('disabled');
 
         this.injectStyles(this.getStyles());
 
@@ -54,7 +61,11 @@ export class IndButton extends IndBaseComponent {
     private attachEventListeners(): void {
         if (this._button) {
             this._button.addEventListener('click', (e) => {
-                console.log('Button clicked', e);
+                this.dispatchEvent(new CustomEvent('button-click-event', {
+                    detail: {originalEvent: e},
+                    bubbles: true,
+                    composed: true
+                }));
             });
         }
     }

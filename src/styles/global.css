@@ -17,8 +17,9 @@
     --base-reverse-color: #333333;
     --primary-color: #111519;
     --primary-hover-color: #414549;
-    --secondary-color: #E9ECEF;
+    --secondary-color: #FFFFFF;
     --secondary-hover-color: #C9CCCF;
+    --secondary-reverse-color: #888888;
     --success-color: #198754;
     --success-hover-color: #49B784;
     --info-color: #0DCAF0;
@@ -29,6 +30,8 @@
     --danger-hover-color: #FC6575;
 
     --neutral-background-color: #CCCCCC;
+    --light-background-color: #F0F0F0;
+    --lighter-background-color: #F7F7F7;
     --outline-color: #2290F0;
     --border-color: #E5E7EB;
     --industrial-ui-color: #00FF00;
@@ -63,6 +66,16 @@ body {
     flex-direction: column;
     padding: 1rem;
     gap: 1rem;
+}
+
+.presentation {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+    background-color: var(--light-background-color);
 }
 
 /* Display */
@@ -142,15 +155,16 @@ h4 { padding: 1rem 0; }
 
 /* Code */
 pre {
-    background-color: #f8fafc;
-    color: #334155;
+    background-color: var(--lighter-background-color);
+    color: var(--base-text-color);
     padding: 1rem;
     border-left: 0.25rem solid var(--industrial-ui-color);
     border-radius: 0.25rem;
     font-family: monospace;
     font-size: var(--font-size-sm);
     overflow-x: auto;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
 }
 
 table.code th { padding: 0.25rem; text-align: left; font-size: var(--font-size-sm); }
-table.code td { padding: 0.25rem; background-color: #f8fafc; color: #334155; font-family: monospace; font-size: var(--font-size-sm); }
+table.code td { padding: 0.25rem; background-color: var(--lighter-background-color); color: var(--base-text-color); font-family: monospace; font-size: var(--font-size-sm); }

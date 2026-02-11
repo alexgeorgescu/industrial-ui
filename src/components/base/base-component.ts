@@ -26,6 +26,15 @@ export abstract class IndBaseComponent extends HTMLElement {
     protected abstract render(): void;
 
     /**
+     * Cleanup the shadow DOM.
+     */
+    protected cleanShadow(): void {
+        while (this.shadow.firstChild) {
+            this.shadow.removeChild(this.shadow.firstChild);
+        }
+    }
+
+    /**
      * Helper method to create and inject styles
      */
     protected injectStyles(css: string): void {
