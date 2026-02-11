@@ -27,7 +27,7 @@
   ],
   "scripts": {
     "deploy": "npm run build && gh-pages -d dist",
-    "dev": "tsup --watch && copy src/assets/logo.svg dist",
+    "dev": "tsup --watch",
     "build": "tsup",
     "lint": "tsc --noEmit",
     "test": "vitest"
