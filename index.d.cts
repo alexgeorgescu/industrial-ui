@@ -71,6 +71,7 @@ declare class IndButton extends IndBaseComponent {
     attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void;
     protected render(): void;
     private attachEventListeners;
+    private extractIcon;
     private getStyles;
 }
 
@@ -148,4 +149,21 @@ declare class IndToggleSwitch extends IndBaseComponent {
     private getStyles;
 }
 
-export { IndApplication, IndButton, IndCard, IndHeader, IndSidebar, IndToggleSwitch };
+type IconSize = "sm" | "md" | "lg" | "xl" | "xxl";
+type IconName = "plus" | "minus" | "close" | "check" | "chevron-right" | "chevron-left" | "search" | "trash" | "edit" | "download";
+/**
+ * Resolves an icon by name. Returns the SVG string or an empty string if not found.
+ */
+declare function getIconByName(name: string, size?: IconSize): string;
+declare function indIconPlus(size?: IconSize): string;
+declare function indIconMinus(size?: IconSize): string;
+declare function indIconClose(size?: IconSize): string;
+declare function indIconCheck(size?: IconSize): string;
+declare function indIconChevronRight(size?: IconSize): string;
+declare function indIconChevronLeft(size?: IconSize): string;
+declare function indIconSearch(size?: IconSize): string;
+declare function indIconTrash(size?: IconSize): string;
+declare function indIconEdit(size?: IconSize): string;
+declare function indIconDownload(size?: IconSize): string;
+
+export { type IconName, type IconSize, IndApplication, IndButton, IndCard, IndHeader, IndSidebar, IndToggleSwitch, getIconByName, indIconCheck, indIconChevronLeft, indIconChevronRight, indIconClose, indIconDownload, indIconEdit, indIconMinus, indIconPlus, indIconSearch, indIconTrash };
