@@ -1,4 +1,5 @@
 import { IndBaseComponent } from "../base/base-component.js";
+import { getIconByName }    from "../../icons/index.js";
 
 /**
  * IndustrialUI Button Component
@@ -27,7 +28,7 @@ export class IndButton extends IndBaseComponent {
     setDisabled(value: boolean): void { this._button && (this._button.disabled = value); }
 
     static get observedAttributes() {
-        return ['disabled', 'variant'];
+        return ['disabled', 'icon', 'variant'];
     }
 
     attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null) {
@@ -39,18 +40,23 @@ export class IndButton extends IndBaseComponent {
     protected render(): void {
         this.cleanShadow();
 
-        const disabled: boolean = this.hasAttr('disabled');
-
-        const variant: string | 'primary' | 'secondary' | 'success' | 'info' | 'warn' | 'danger' = this.getAttr('variant', 'primary');
-
         this.injectStyles(this.getStyles());
 
-        this._button                = document.createElement('button');
-        const slot: HTMLSlotElement = document.createElement('slot');
+        this._button = document.createElement('button');
 
+        const variant: string  = this.getAttr('variant', 'primary');
         this._button.className = `btn btn-${variant}`;
+
+        const iconName: string                 = this.getAttr('icon');
+        const iconSpan: HTMLSpanElement | null = this.extractIcon(iconName);
+        if (iconSpan) {
+            this._button.appendChild(iconSpan);
+        }
+
+        const slot: HTMLSlotElement = document.createElement('slot');
         this._button.appendChild(slot);
-        this._button.disabled = disabled;
+
+        this._button.disabled   = this.hasAttr('disabled');
 
         this.shadow.appendChild(this._button);
 
@@ -68,6 +74,17 @@ export class IndButton extends IndBaseComponent {
                 }));
             });
         }
+    }
+
+    private extractIcon(iconName: string): HTMLSpanElement | null {
+        const iconSvg = getIconByName(iconName, "sm");
+        if (iconSvg) {
+            const iconSpan: HTMLSpanElement = document.createElement('span');
+            iconSpan.className              = 'btn-icon';
+            iconSpan.innerHTML              = iconSvg;
+            return iconSpan;
+        }
+        return null;
     }
 
     private getStyles(): string {
@@ -146,6 +163,13 @@ export class IndButton extends IndBaseComponent {
       
       .btn-danger:hover {
         background-color: var(--danger-hover-color);
+      }
+      
+      .btn-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 0.25rem 0 -0.25rem;
       }
     `
     }

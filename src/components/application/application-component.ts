@@ -72,6 +72,7 @@ export class IndApplication extends IndBaseComponent {
         display: flex;
         flex-direction: row;
         width: 100%;
+        padding: 0 1rem;
         overflow-y: scroll;
       }
       `
