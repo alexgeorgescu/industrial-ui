@@ -58,12 +58,16 @@ declare class IndApplication extends IndBaseComponent {
  * @element ind-button
  *
  * @attr {boolean} disabled - Whether the button is disabled
+ * @attr {string} icon - The icon to display on the button (from the IndustrialUI icon set)
  * @attr {string} variant - Button style: 'primary' | 'secondary' | 'success' | 'info' | 'warn' | 'danger' (default: 'primary')
  *
  * @example <ind-button variant="success">I am a button</ind-button>
  */
 declare class IndButton extends IndBaseComponent {
     private _button;
+    private _isDisabled;
+    private _iconName;
+    private _variant;
     constructor();
     isDisabled(): boolean;
     setDisabled(value: boolean): void;
@@ -98,6 +102,51 @@ declare class IndCard extends IndBaseComponent {
 declare class IndHeader extends IndBaseComponent {
     constructor();
     protected render(): void;
+    private getStyles;
+}
+
+/**
+ * IndustrialUI Knob Component
+ *
+ * @element ind-knob
+ *
+ * @example <ind-knob></ind-knob>
+ */
+declare class IndKnob extends IndBaseComponent {
+    private _knob;
+    private _isDisabled;
+    private _isDragging;
+    private _value;
+    private _min;
+    private _max;
+    private _showGrid;
+    private _symbol;
+    private _size;
+    constructor();
+    isDisabled(): boolean;
+    setDisabled(value: boolean): void;
+    static get observedAttributes(): string[];
+    attributeChangedCallback(name: string, oldValue: string, newValue: string): void;
+    disconnectedCallback(): void;
+    protected render(): void;
+    private normalizeInputValue;
+    /**
+     * Draw a line at the provided coordinates.
+     *
+     * @param x1 Start X coordinate
+     * @param y1 Start Y coordinate
+     * @param x2 End X coordinate
+     * @param y2 End Y coordinate
+     * @param tx Translation X coordinate
+     * @param ty Translation Y coordinate
+     * @param ang Rotation angle
+     */
+    private createLine;
+    private onPointerDown;
+    private onPointerMove;
+    private onPointerUp;
+    private updateValueFromPointer;
+    private attachEventListeners;
     private getStyles;
 }
 
@@ -137,6 +186,10 @@ declare class IndSidebar extends IndBaseComponent {
  */
 declare class IndToggleSwitch extends IndBaseComponent {
     private _toggle;
+    private _isChecked;
+    private _isDisabled;
+    private _label;
+    private _variant;
     constructor();
     isChecked(): boolean;
     isDisabled(): boolean;
@@ -166,4 +219,4 @@ declare function indIconTrash(size?: IconSize): string;
 declare function indIconEdit(size?: IconSize): string;
 declare function indIconDownload(size?: IconSize): string;
 
-export { type IconName, type IconSize, IndApplication, IndButton, IndCard, IndHeader, IndSidebar, IndToggleSwitch, getIconByName, indIconCheck, indIconChevronLeft, indIconChevronRight, indIconClose, indIconDownload, indIconEdit, indIconMinus, indIconPlus, indIconSearch, indIconTrash };
+export { type IconName, type IconSize, IndApplication, IndButton, IndCard, IndHeader, IndKnob, IndSidebar, IndToggleSwitch, getIconByName, indIconCheck, indIconChevronLeft, indIconChevronRight, indIconClose, indIconDownload, indIconEdit, indIconMinus, indIconPlus, indIconSearch, indIconTrash };

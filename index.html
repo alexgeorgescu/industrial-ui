@@ -21,7 +21,7 @@
     <!-- Sidebar -->
     <div slot="sidebar">
         <ind-sidebar
-                items='[{"label": "About", "link": "#about"}, {"label": "Installation", "link": "#installation"}, {"label": "Button", "link": "#button"}, {"label": "Card", "link": "#card"}, {"label": "ToggleSwitch", "link": "#toggle-switch"}]'>
+                items='[{"label": "About", "link": "#about"}, {"label": "Installation", "link": "#installation"}, {"label": "Button", "link": "#button"}, {"label": "Card", "link": "#card"}, {"label": "Knob", "link": "#knob"}, {"label": "ToggleSwitch", "link": "#toggle-switch"}]'>
         </ind-sidebar>
     </div>
 
@@ -50,7 +50,7 @@
             <h2>Button</h2>
             <p>A customizable button web component with multiple style variants.</p>
             <h4>Usage:</h4>
-            <pre>&lt;ind-button&gt;Click Me&lt;/ind-button&gt;</pre>
+            <pre><em>&lt;ind-button&gt;</em>Click Me<em>&lt;/ind-button&gt;</em></pre>
             <h4>Attributes:</h4>
             <table class="code">
                 <thead>
@@ -63,16 +63,22 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td>variant</td>
-                    <td>string</td>
-                    <td>"primary"</td>
-                    <td>Button style variant. One of: primary, secondary, success, info, warn, danger</td>
-                </tr>
-                <tr>
-                    <td>disabled</td>
+                    <td><em>disabled</em></td>
                     <td>boolean</td>
                     <td>false</td>
                     <td>Disables the button</td>
+                </tr>
+                <tr>
+                    <td><em>icon</em></td>
+                    <td>string</td>
+                    <td>undefined</td>
+                    <td>Specify the icon name. One of: plus, minus, close, check, etc</td>
+                </tr>
+                <tr>
+                    <td><em>variant</em></td>
+                    <td>string</td>
+                    <td>"primary"</td>
+                    <td>Button style variant. One of: primary, secondary, success, info, warn, danger</td>
                 </tr>
                 </tbody>
             </table>
@@ -81,19 +87,19 @@
             <pre>isDisabled(): boolean {...}
 setDisabled(value: boolean): void {...}</pre>
             <h4>Events:</h4>
-            <pre>A CustomEvent of type "button-click-event" is triggered when the native event 'click' is called</pre>
+            <pre>A CustomEvent of type <em>'button-click-event'</em> is triggered when the native event <em>'click'</em> is called</pre>
 
             <h4>Examples:</h4>
             <div class="presentation">
                 <h5>Basic Button</h5>
                 <ind-button>Button</ind-button>
-                <pre>&lt;ind-button&gt;Button&lt;/ind-button&gt;</pre>
+                <pre><em>&lt;ind-button&gt;</em>Button<em>&lt;/ind-button&gt;</em></pre>
             </div>
 
             <div class="presentation">
                 <h5>Disabled State</h5>
                 <ind-button disabled="true">Button</ind-button>
-                <pre>&lt;ind-button disabled="true"&gt;Button&lt;/ind-button&gt;</pre>
+                <pre><em>&lt;ind-button</em> disabled=<em>"true"&gt;</em>Button<em>&lt;/ind-button&gt;</em></pre>
             </div>
 
             <div class="presentation">
@@ -104,10 +110,10 @@ setDisabled(value: boolean): void {...}</pre>
                     <ind-button icon="search" variant="success">Search</ind-button>
                     <ind-button icon="trash" variant="danger">Trash</ind-button>
                 </div>
-                <pre>&lt;ind-button icon="plus"&gt;Add&lt;/ind-button&gt;
-&lt;ind-button icon="download"&gt;Download&lt;/ind-button&gt;
-&lt;ind-button icon="search" variant="success"&gt;Search&lt;/ind-button&gt;
-&lt;ind-button icon="trash" variant="danger"&gt;Trash&lt;/ind-button&gt;</pre>
+                <pre><em>&lt;ind-button</em> icon=<em>"plus"&gt;</em>Add<em>&lt;/ind-button&gt;</em>
+<em>&lt;ind-button</em> icon=<em>"download"&gt;</em>Download<em>&lt;/ind-button&gt;</em>
+<em>&lt;ind-button</em> icon=<em>"search"</em> variant=<em>"success"&gt;</em>Search<em>&lt;/ind-button&gt;</em>
+<em>&lt;ind-button</em> icon=<em>"trash"</em> variant=<em>"danger"&gt;</em>Trash<em>&lt;/ind-button&gt;</em></pre>
             </div>
 
             <div class="presentation">
@@ -120,12 +126,12 @@ setDisabled(value: boolean): void {...}</pre>
                     <ind-button variant="warn">Warn</ind-button>
                     <ind-button variant="danger">Danger</ind-button>
                 </div>
-                <pre>&lt;ind-button variant="primary"&gt;Primary&lt;/ind-button&gt;
-&lt;ind-button variant="secondary"&gt;Secondary&lt;/ind-button&gt;
-&lt;ind-button variant="success"&gt;Success&lt;/ind-button&gt;
-&lt;ind-button variant="info"&gt;Info&lt;/ind-button&gt;
-&lt;ind-button variant="warn"&gt;Warn&lt;/ind-button&gt;
-&lt;ind-button variant="danger"&gt;Danger&lt;/ind-button&gt;</pre>
+                <pre><em>&lt;ind-button</em> variant=<em>"primary"&gt;</em>Primary<em>&lt;/ind-button&gt;</em>
+<em>&lt;ind-button</em> variant=<em>"secondary"&gt;</em>Secondary<em>&lt;/ind-button&gt;</em>
+<em>&lt;ind-button</em> variant=<em>"success"&gt;</em>Success<em>&lt;/ind-button&gt;</em>
+<em>&lt;ind-button</em> variant=<em>"info"&gt;</em>Info<em>&lt;/ind-button&gt;</em>
+<em>&lt;ind-button</em> variant=<em>"warn"&gt;</em>Warn<em>&lt;/ind-button&gt;</em>
+<em>&lt;ind-button</em> variant=<em>"danger"&gt;</em>Danger<em>&lt;/ind-button&gt;</em></pre>
             </div>
         </div>
 
@@ -134,7 +140,7 @@ setDisabled(value: boolean): void {...}</pre>
             <h2>Card</h2>
             <p>A customizable card web component.</p>
             <h4>Usage:</h4>
-            <pre>&lt;ind-card&gt;Contents&lt;/ind-card&gt;</pre>
+            <pre><em>&lt;ind-card&gt;</em>Contents<em>&lt;/ind-card&gt;</em></pre>
             <h4>Attributes:</h4>
             <table class="code">
                 <thead>
@@ -147,13 +153,13 @@ setDisabled(value: boolean): void {...}</pre>
                 </thead>
                 <tbody>
                 <tr>
-                    <td>header</td>
+                    <td><em>header</em></td>
                     <td>slot</td>
                     <td>undefined</td>
                     <td>Define the header of the card</td>
                 </tr>
                 <tr>
-                    <td>footer</td>
+                    <td><em>footer</em></td>
                     <td>slot</td>
                     <td>undefiend</td>
                     <td>Define the footer of the card</td>
@@ -161,13 +167,13 @@ setDisabled(value: boolean): void {...}</pre>
                 </tbody>
             </table>
             <h4>Example:</h4>
-            <pre>&lt;ind-card>
-    &lt;div slot="header"&gt;Card Header&lt;/div&gt;
+            <pre><em>&lt;ind-card></em>
+    &lt;div <em>slot="header"</em>&gt;Card Header&lt;/div&gt;
     &lt;p>Some card contents to showcase the card usage&lt;/p&gt;
-    &lt;div slot="footer"&gt;
-        &lt;ind-button variant="primary"&gt;Close&lt;/ind-button&gt;
+    &lt;div <em>slot="footer"</em>&gt;
+        <em>&lt;ind-button</em> variant=<em>"primary"&gt;</em>Close<em>&lt;/ind-button&gt;</em>
     &lt;/div&gt;
-&lt;/ind-card&gt;</pre>
+<em>&lt;/ind-card&gt;</em></pre>
             <div class="d-flex py-4 g-2">
                 <ind-card>
                     <div slot="header">Card Header</div>
@@ -180,12 +186,118 @@ setDisabled(value: boolean): void {...}</pre>
             </div>
         </div>
 
+        <!-- Knob component -->
+        <div id="knob">
+            <h2>Knob</h2>
+            <p>A customizable knob web component.</p>
+            <h4>Usage:</h4>
+            <pre><em>&lt;ind-knob&gt;</em><em>&lt;/ind-knob&gt;</em></pre>
+            <h4>Attributes:</h4>
+            <table class="code">
+                <thead>
+                <tr>
+                    <th>Attribute</th>
+                    <th>Type</th>
+                    <th>Default</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><em>disabled</em></td>
+                    <td>boolean</td>
+                    <td>false</td>
+                    <td>Disables the knob</td>
+                </tr>
+                <tr>
+                    <td><em>grid</em></td>
+                    <td>boolean</td>
+                    <td>false</td>
+                    <td>Whether to display the reference grid or not</td>
+                </tr>
+                <tr>
+                    <td><em>min</em></td>
+                    <td>number</td>
+                    <td>0</td>
+                    <td>Specify the minimum value</td>
+                </tr>
+                <tr>
+                    <td><em>max</em></td>
+                    <td>number</td>
+                    <td>100</td>
+                    <td>Specify the maximum value</td>
+                </tr>
+                <tr>
+                    <td><em>size</em></td>
+                    <td>number</td>
+                    <td>140</td>
+                    <td>Specify the width/height of the object (px)</td>
+                </tr>
+                <tr>
+                    <td><em>symbol</em></td>
+                    <td>string</td>
+                    <td>%</td>
+                    <td>Specify the symbol to display after the value</td>
+                </tr>
+                <tr>
+                    <td><em>value</em></td>
+                    <td>number</td>
+                    <td>0</td>
+                    <td>Specify the current value</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h4>Public API:</h4>
+            <pre>isDisabled(): boolean {...}
+setDisabled(value: boolean): void {...}</pre>
+            <h4>Events:</h4>
+            <pre>A CustomEvent of type <em>'knob-change-event'</em> is triggered when the knob changes its value</pre>
+
+            <h4>Examples:</h4>
+            <div class="presentation">
+                <h5>Basic Knob</h5>
+                <ind-knob></ind-knob>
+                <pre><em>&lt;ind-knob&gt;</em><em>&lt;/ind-knob&gt;</em></pre>
+            </div>
+
+            <div class="presentation">
+                <h5>Default Value</h5>
+                <ind-knob value="50"></ind-knob>
+                <pre><em>&lt;ind-knob</em> value=<em>"50"&gt;</em><em>&lt;/ind-knob&gt;</em></pre>
+            </div>
+
+            <div class="presentation">
+                <h5>Disabled State</h5>
+                <ind-knob value="33" disabled="true"></ind-knob>
+                <pre><em>&lt;ind-knob</em> value=<em>"33"</em> disabled=<em>"true"&gt;</em><em>&lt;/ind-knob&gt;</em></pre>
+            </div>
+
+            <div class="presentation">
+                <h5>Reference Grid</h5>
+                <ind-knob grid="true"></ind-knob>
+                <pre><em>&lt;ind-knob</em> grid=<em>"true"&gt;</em><em>&lt;/ind-knob&gt;</em></pre>
+            </div>
+
+            <div class="presentation">
+                <h5>Symbol Change</h5>
+                <ind-knob value="27" symbol="&deg;"></ind-knob>
+                <pre><em>&lt;ind-knob</em> value=<em>"27"</em> symbol=<em>"&deg;"&gt;</em><em>&lt;/ind-knob&gt;</em></pre>
+            </div>
+
+            <div class="presentation">
+                <h5>Min & max</h5>
+                <ind-knob grid="true" min="16" max="32" symbol="&deg;"></ind-knob>
+                <pre><em>&lt;ind-knob</em> grid=<em>"true"</em> min=<em>"16"</em> max=<em>"32"</em> symbol=<em>"&deg;"&gt;</em><em>&lt;/ind-knob&gt;</em></pre>
+            </div>
+        </div>
+
         <!-- Toggle Switch component -->
         <div id="toggle-switch">
             <h2>ToggleSwitch</h2>
             <p>A customizable toggle switch web component.</p>
             <h4>Usage:</h4>
-            <pre>&lt;ind-toggle-switch&gt;&lt;/ind-toggle-switch&gt;</pre>
+            <pre><em>&lt;ind-toggle-switch&gt;</em><em>&lt;/ind-toggle-switch&gt;</em></pre>
             <h4>Attributes:</h4>
             <table class="code">
                 <thead>
@@ -230,31 +342,31 @@ isDisabled(): boolean {...}
 setChecked(value: boolean): void {...}
 setDisabled(value: boolean): void {...}</pre>
             <h4>Events:</h4>
-            <pre>A CustomEvent of type "toggle-switch-toggled" is triggered when the native event 'change' is called</pre>
+            <pre>A CustomEvent of type <em>'toggle-switch-toggled'</em> is triggered when the native event <em>'change'</em> is called</pre>
 
             <h4>Examples:</h4>
             <div class="presentation">
                 <h5>Basic Toggle</h5>
                 <ind-toggle-switch></ind-toggle-switch>
-                <pre>&lt;ind-toggle-switch&gt;&lt;/ind-toggle-switch&gt;</pre>
+                <pre><em>&lt;ind-toggle-switch&gt;</em><em>&lt;/ind-toggle-switch&gt;</em></pre>
             </div>
 
             <div class="presentation">
                 <h5>Basic Toggle Checked</h5>
                 <ind-toggle-switch checked="true"></ind-toggle-switch>
-                <pre>&lt;ind-toggle-switch checked="true"&gt;&lt;/ind-toggle-switch&gt;</pre>
+                <pre><em>&lt;ind-toggle-switch</em> checked=<em>"true"&gt;</em><em>&lt;/ind-toggle-switch&gt;</em></pre>
             </div>
 
             <div class="presentation">
                 <h5>Disabled State</h5>
                 <ind-toggle-switch checked="true" disabled="true"></ind-toggle-switch>
-                <pre>&lt;ind-toggle-switch checked="true" disabled="true"&gt;&lt;/ind-toggle-switch&gt;</pre>
+                <pre><em>&lt;ind-toggle-switch</em> checked=<em>"true"</em> disabled=<em>"true"&gt;</em><em>&lt;/ind-toggle-switch&gt;</em></pre>
             </div>
 
             <div class="presentation">
                 <h5>With Label</h5>
                 <ind-toggle-switch label="Toggle me!"></ind-toggle-switch>
-                <pre>&lt;ind-toggle-switch label="Toggle me!"&gt;&lt;/ind-toggle-switch&gt;</pre>
+                <pre><em>&lt;ind-toggle-switch</em> label=<em>"Toggle me!"&gt;</em><em>&lt;/ind-toggle-switch&gt;</em></pre>
             </div>
 
             <div class="presentation">
@@ -268,7 +380,7 @@ setDisabled(value: boolean): void {...}</pre>
                         toggleSwitch.setChecked(!toggleSwitch.isChecked());
                     });
                 </script>
-                <pre>&lt;ind-toggle-switch label="Toggle me!"&gt;&lt;/ind-toggle-switch&gt;</pre>
+                <pre><em>&lt;ind-toggle-switch</em> label=<em>"Toggle me!"&gt;</em><em>&lt;/ind-toggle-switch&gt;</em></pre>
             </div>
 
             <div class="presentation">
@@ -281,12 +393,12 @@ setDisabled(value: boolean): void {...}</pre>
                     <ind-toggle-switch checked="true" variant="warn"></ind-toggle-switch>
                     <ind-toggle-switch checked="true" variant="danger"></ind-toggle-switch>
                 </div>
-                <pre>&lt;ind-toggle-switch checked="true"&gt;&lt;/ind-toggle-switch&gt;
-&lt;ind-toggle-switch checked="true" variant="secondary"&gt;&lt;/ind-toggle-switch&gt;
-&lt;ind-toggle-switch checked="true" variant="success"&gt;&lt;/ind-toggle-switch&gt;
-&lt;ind-toggle-switch checked="true" variant="info"&gt;&lt;/ind-toggle-switch&gt;
-&lt;ind-toggle-switch checked="true" variant="warn"&gt;&lt;/ind-toggle-switch&gt;
-&lt;ind-toggle-switch checked="true" variant="danger"&gt;&lt;/ind-toggle-switch&gt;</pre>
+                <pre><em>&lt;ind-toggle-switch</em> checked=<em>"true"&gt;</em><em>&lt;/ind-toggle-switch&gt;</em>
+<em>&lt;ind-toggle-switch</em> checked=<em>"true"</em> variant=<em>"secondary"&gt;</em><em>&lt;/ind-toggle-switch&gt;</em>
+<em>&lt;ind-toggle-switch</em> checked=<em>"true"</em> variant=<em>"success"&gt;</em><em>&lt;/ind-toggle-switch&gt;</em>
+<em>&lt;ind-toggle-switch</em> checked=<em>"true"</em> variant=<em>"info"&gt;</em><em>&lt;/ind-toggle-switch&gt;</em>
+<em>&lt;ind-toggle-switch</em> checked=<em>"true"</em> variant=<em>"warn"&gt;</em><em>&lt;/ind-toggle-switch&gt;</em>
+<em>&lt;ind-toggle-switch</em> checked=<em>"true"</em> variant=<em>"danger"&gt;</em><em>&lt;/ind-toggle-switch&gt;</em></pre>
             </div>
         </div>
 
