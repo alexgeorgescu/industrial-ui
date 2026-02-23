@@ -1,6 +1,4 @@
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-
-// Ensure the component is defined before tests
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import './toggle-switch-component';
 
 describe('IndToggleSwitch', () => {
@@ -32,7 +30,7 @@ describe('IndToggleSwitch', () => {
     });
 
     it('disables the toggle switch when disabled attribute is set', () => {
-        toggleSwitchEl.setAttribute('disabled', '');
+        toggleSwitchEl.setAttribute('disabled', 'true');
         const shadowButton = toggleSwitchEl.shadowRoot?.querySelector('input');
         expect(shadowButton?.disabled).toBe(true);
     });

@@ -7,6 +7,7 @@ import { getIconByName }    from "../../icons/index.js";
  * @element ind-button
  *
  * @attr {boolean} disabled - Whether the button is disabled
+ * @attr {string} icon - The icon to display on the button (from the IndustrialUI icon set)
  * @attr {string} variant - Button style: 'primary' | 'secondary' | 'success' | 'info' | 'warn' | 'danger' (default: 'primary')
  *
  * @example <ind-button variant="success">I am a button</ind-button>
@@ -14,6 +15,9 @@ import { getIconByName }    from "../../icons/index.js";
 export class IndButton extends IndBaseComponent {
 
     private _button: HTMLButtonElement | undefined;
+    private _isDisabled: boolean     = false;
+    private _iconName: string | null = null;
+    private _variant: string         = 'primary';
 
     constructor() {
         super();
@@ -31,10 +35,23 @@ export class IndButton extends IndBaseComponent {
         return ['disabled', 'icon', 'variant'];
     }
 
+    /* Read component attributes and update the internal state accordingly */
     attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null) {
-        if (name && (oldValue !== newValue)) {
-            this.render();
+        if (oldValue === newValue) return;
+
+        switch (name) {
+            case 'disabled':
+                this._isDisabled = 'true' == newValue;
+                break;
+            case 'icon':
+                this._iconName = newValue;
+                break;
+            case 'variant':
+                this._variant = newValue || 'primary';
+                break;
         }
+
+        this.render();
     }
 
     protected render(): void {
@@ -44,11 +61,9 @@ export class IndButton extends IndBaseComponent {
 
         this._button = document.createElement('button');
 
-        const variant: string  = this.getAttr('variant', 'primary');
-        this._button.className = `btn btn-${variant}`;
+        this._button.className = `btn btn-${this._variant}`;
 
-        const iconName: string                 = this.getAttr('icon');
-        const iconSpan: HTMLSpanElement | null = this.extractIcon(iconName);
+        const iconSpan: HTMLSpanElement | null = this.extractIcon(this._iconName || '');
         if (iconSpan) {
             this._button.appendChild(iconSpan);
         }
@@ -56,7 +71,7 @@ export class IndButton extends IndBaseComponent {
         const slot: HTMLSlotElement = document.createElement('slot');
         this._button.appendChild(slot);
 
-        this._button.disabled   = this.hasAttr('disabled');
+        this._button.disabled = this._isDisabled;
 
         this.shadow.appendChild(this._button);
 

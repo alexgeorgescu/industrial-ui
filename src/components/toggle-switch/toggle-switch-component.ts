@@ -15,6 +15,10 @@ import { IndBaseComponent } from "../base/base-component.js";
 export class IndToggleSwitch extends IndBaseComponent {
 
     private _toggle: HTMLInputElement | undefined;
+    private _isChecked: boolean   = false;
+    private _isDisabled: boolean  = false;
+    private _label: string | null = null;
+    private _variant: string      = 'primary';
 
     constructor() {
         super();
@@ -38,30 +42,40 @@ export class IndToggleSwitch extends IndBaseComponent {
         return ['checked', 'disabled', 'label', 'variant'];
     }
 
+    /* Read component attributes and update the internal state accordingly */
     attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null) {
-        if (name && (oldValue !== newValue)) {
-            this.render();
+        if (oldValue === newValue) return;
+
+        switch (name) {
+            case 'checked':
+                this._isChecked = 'true' == newValue;
+                break;
+            case 'disabled':
+                this._isDisabled = 'true' == newValue;
+                break;
+            case 'label':
+                this._label = newValue;
+                break;
+            case 'variant':
+                this._variant = newValue || 'primary';
+                break;
         }
+
+        this.render();
     }
 
     protected render(): void {
         this.cleanShadow();
 
-        const checked: boolean  = this.getAttr('checked', 'false') === 'true';
-        const disabled: boolean = this.hasAttr('disabled');
-        const label: string     = this.getAttr('label', '');
-
-        const variant: string | 'primary' | 'secondary' | 'success' | 'info' | 'warn' | 'danger' = this.getAttr('variant', 'primary');
-
         this.injectStyles(this.getStyles());
 
         this._toggle          = document.createElement('input');
         this._toggle.type     = 'checkbox';
-        this._toggle.checked  = checked;
-        this._toggle.disabled = disabled;
+        this._toggle.checked  = this._isChecked;
+        this._toggle.disabled = this._isDisabled;
 
         const slider: HTMLSpanElement = document.createElement('span');
-        slider.className              = `slider  ${variant}`;
+        slider.className              = `slider  ${this._variant}`;
 
         const switchElement: HTMLLabelElement = document.createElement('label');
         switchElement.className               = 'switch';
@@ -73,10 +87,10 @@ export class IndToggleSwitch extends IndBaseComponent {
         container.appendChild(switchElement);
 
         // Set the toggle switch label if any
-        if (label) {
+        if (this._label) {
             const text: HTMLSpanElement = document.createElement('span');
             text.className              = 'label';
-            text.textContent            = label;
+            text.textContent            = this._label;
             container.appendChild(text);
         }
 
