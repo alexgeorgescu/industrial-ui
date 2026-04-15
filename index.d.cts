@@ -47,9 +47,10 @@ declare abstract class IndBaseComponent extends HTMLElement {
  * @example <ind-application>...</ind-application>
  */
 declare class IndApplication extends IndBaseComponent {
+    _template: HTMLTemplateElement;
     constructor();
     protected render(): void;
-    private getStyles;
+    private defineTemplate;
 }
 
 /**
@@ -59,7 +60,7 @@ declare class IndApplication extends IndBaseComponent {
  *
  * @attr {boolean} disabled - Whether the button is disabled
  * @attr {string} icon - The icon to display on the button (from the IndustrialUI icon set)
- * @attr {string} variant - Button style: 'primary' | 'secondary' | 'success' | 'info' | 'warn' | 'danger' (default: 'primary')
+ * @attr {string} variant - Button style: 'primary' | 'secondary' | 'success' | 'icon' | 'info' | 'warn' | 'danger' (default: 'primary')
  *
  * @example <ind-button variant="success">I am a button</ind-button>
  */
@@ -87,19 +88,7 @@ declare class IndButton extends IndBaseComponent {
  * @example <ind-card variant="success">I am a button</ind-card>
  */
 declare class IndCard extends IndBaseComponent {
-    constructor();
-    protected render(): void;
-    private getStyles;
-}
-
-/**
- * IndustrialUI Header Toolbar Component
- *
- * @element ind-header
- *
- * @example <ind-header>...</ind-header>
- */
-declare class IndHeader extends IndBaseComponent {
+    private _card;
     constructor();
     protected render(): void;
     private getStyles;
@@ -150,11 +139,61 @@ declare class IndKnob extends IndBaseComponent {
     private getStyles;
 }
 
+interface IndMenuItem {
+    label: string;
+    action: () => void;
+}
+
+/**
+ * IndustrialUI Menu Component
+ *
+ * @element ind-menu
+ *
+ * @example <ind-menu></ind-menu>
+ */
+declare class IndMenu extends IndBaseComponent {
+    private _menu;
+    private _items;
+    private _title;
+    private _isOpen;
+    private _topOffset;
+    private _leftOffset;
+    constructor(top: string, left: string, title: string);
+    set items(values: IndMenuItem[]);
+    static get observedAttributes(): string[];
+    attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void;
+    private onDocumentClick;
+    private onDocumentKeydown;
+    private destroyMenu;
+    connectedCallback(): void;
+    protected render(): void;
+    private getStyles;
+}
+
+/**
+ * IndustrialUI Menubar Component
+ *
+ * @element ind-menubar
+ *
+ * @example <ind-menubar>...</ind-menubar>
+ */
+declare class IndMenubar extends IndBaseComponent {
+    private _menubar;
+    constructor();
+    protected render(): void;
+    private getStyles;
+}
+
 interface IndSidebarItem {
     label: string;
     link: string;
     icon?: string;
     active?: boolean;
+}
+
+interface IndSidebarSection {
+    label: string;
+    children: IndSidebarItem[];
 }
 
 /**
@@ -165,10 +204,47 @@ interface IndSidebarItem {
  * @example <ind-sidebar>...</ind-sidebar>
  */
 declare class IndSidebar extends IndBaseComponent {
-    _items: IndSidebarItem[];
+    private _sidebar;
+    private _name;
+    private _items;
     constructor();
+    set items(values: IndSidebarSection[]);
     static get observedAttributes(): string[];
+    attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void;
     protected render(): void;
+    private createSidebar;
+    private createSidebarHeader;
+    private createSidebarNav;
+    private createSidebarFooter;
+    private extractIcon;
+    private toggleCompactMode;
+    private getStyles;
+}
+
+/**
+ * IndustrialUI Tile Component
+ *
+ * @element ind-tile
+ *
+ * @attr {boolean} active - Whether the tile is active
+ * @attr {boolean} disabled - Whether the tile is disabled
+ * @attr {string} icon - The icon to display on the tile (from the IndustrialUI icon set)
+ *
+ * @example <ind-tile icon="bulb">Lights</ind-tile>
+ */
+declare class IndTile extends IndBaseComponent {
+    private _tile;
+    private _isActive;
+    private _isDisabled;
+    private _iconName;
+    constructor();
+    isDisabled(): boolean;
+    setDisabled(value: boolean): void;
+    static get observedAttributes(): string[];
+    attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void;
+    protected render(): void;
+    private attachEventListeners;
+    private extractIcon;
     private getStyles;
 }
 
@@ -203,20 +279,32 @@ declare class IndToggleSwitch extends IndBaseComponent {
 }
 
 type IconSize = "sm" | "md" | "lg" | "xl" | "xxl";
-type IconName = "plus" | "minus" | "close" | "check" | "chevron-right" | "chevron-left" | "search" | "trash" | "edit" | "download";
+type IconName = "about" | "burger-menu" | "button" | "card" | "check" | "chevron-left" | "chevron-right" | "close" | "controller" | "download" | "edit" | "knob" | "industrial" | "light-bulb" | "menu" | "menubar" | "minus" | "plus" | "search" | "sidebar" | "switch" | "tile" | "trash";
 /**
  * Resolves an icon by name. Returns the SVG string or an empty string if not found.
  */
-declare function getIconByName(name: string, size?: IconSize): string;
-declare function indIconPlus(size?: IconSize): string;
-declare function indIconMinus(size?: IconSize): string;
-declare function indIconClose(size?: IconSize): string;
-declare function indIconCheck(size?: IconSize): string;
-declare function indIconChevronRight(size?: IconSize): string;
-declare function indIconChevronLeft(size?: IconSize): string;
-declare function indIconSearch(size?: IconSize): string;
-declare function indIconTrash(size?: IconSize): string;
-declare function indIconEdit(size?: IconSize): string;
-declare function indIconDownload(size?: IconSize): string;
+declare function getIconByName(name: string, size?: IconSize, stroke?: number, startColor?: string, endColor?: string): string;
+declare function indIconAbout(s: number, stroke: number, def: string): string;
+declare function indIconBurgerMenu(s: number, stroke: number, def: string): string;
+declare function indIconButton(s: number, stroke: number, def: string): string;
+declare function indIconCard(s: number, stroke: number, def: string): string;
+declare function indIconCheck(s: number, stroke: number, def: string): string;
+declare function indIconChevronLeft(s: number, stroke: number, def: string): string;
+declare function indIconChevronRight(s: number, stroke: number, def: string): string;
+declare function indIconClose(s: number, stroke: number, def: string): string;
+declare function indIconController(s: number, stroke: number, def: string): string;
+declare function indIconDownload(s: number, stroke: number, def: string): string;
+declare function indIconEdit(s: number, stroke: number, def: string): string;
+declare function indIconIndustrial(s: number, stroke: number, def: string): string;
+declare function indIconKnob(s: number, stroke: number, def: string): string;
+declare function indIconLightBulb(s: number, stroke: number, def: string): string;
+declare function indIconMenu(s: number, stroke: number, def: string): string;
+declare function indIconMenubar(s: number, stroke: number, def: string): string;
+declare function indIconMinus(s: number, stroke: number, def: string): string;
+declare function indIconPlus(s: number, stroke: number, def: string): string;
+declare function indIconSearch(s: number, stroke: number, def: string): string;
+declare function indIconSwitch(s: number, stroke: number, def: string): string;
+declare function indIconTile(s: number, stroke: number, def: string): string;
+declare function indIconTrash(s: number, stroke: number, def: string): string;
 
-export { type IconName, type IconSize, IndApplication, IndButton, IndCard, IndHeader, IndKnob, IndSidebar, IndToggleSwitch, getIconByName, indIconCheck, indIconChevronLeft, indIconChevronRight, indIconClose, indIconDownload, indIconEdit, indIconMinus, indIconPlus, indIconSearch, indIconTrash };
+export { type IconName, type IconSize, IndApplication, IndButton, IndCard, IndKnob, IndMenu, IndMenubar, IndSidebar, IndTile, IndToggleSwitch, getIconByName, indIconAbout, indIconBurgerMenu, indIconButton, indIconCard, indIconCheck, indIconChevronLeft, indIconChevronRight, indIconClose, indIconController, indIconDownload, indIconEdit, indIconIndustrial, indIconKnob, indIconLightBulb, indIconMenu, indIconMenubar, indIconMinus, indIconPlus, indIconSearch, indIconSwitch, indIconTile, indIconTrash };

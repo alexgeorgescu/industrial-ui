@@ -2,55 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>Industrial UI - A lightweight modular UI industrial & IOT component library</title>
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-    <link rel="stylesheet" href="index.css">
-    <script type="module" src="index.js"></script>
+    <link rel="icon" type="image/x-icon" href="../dist/assets/favicon.ico">
+    <link rel="stylesheet" href="../dist/index.css">
+    <script type="module" src="../dist/index.js"></script>
 </head>
 <body>
 <ind-application>
-    <!-- Main header -->
-    <div slot="header">
-        <ind-header>
-            <div class="logo"></div>
-            <h2 class="title">Industrial UI Library</h2>
-        </ind-header>
-    </div>
-
     <!-- Sidebar -->
     <div slot="sidebar">
-        <ind-sidebar
-                items='[{"label": "About", "link": "#about"}, {"label": "Installation", "link": "#installation"}, {"label": "Button", "link": "#button"}, {"label": "Card", "link": "#card"}, {"label": "Knob", "link": "#knob"}, {"label": "ToggleSwitch", "link": "#toggle-switch"}]'>
-        </ind-sidebar>
+        <ind-sidebar id="sidebar" name="Industrial UI"></ind-sidebar>
     </div>
 
-    <!-- Main contents -->
-    <div class="container">
-        <div id="about">
+    <!-- Menubar -->
+    <div slot="menubar">
+        <ind-menubar id="menubar"></ind-menubar>
+    </div>
+
+    <!-- Contents -->
+    <div style="padding: 0.5rem 2rem; overflow: auto;">
+
+        <!-- About -->
+        <div id="about" class="mb-5">
             <h2>Welcome to Industrial UI Library</h2>
             <h4>A lightweight modular UI industrial & IOT component library:</h4>
-            <p>✅ Built using TypeScript & Web Components</p>
-            <p>✅ Lightweight, no external dependencies other than dev-dependencies</p>
-            <p>✅ Global styling and variables allow defining a consistent yet customizable look & feel</p>
-            <p>✅ Tested using vitest</p>
-            <p>✅ Each component is well documented</p>
-            <p>✅ Demo showcase (this page)</p>
-            <p></p>
+            <p>&bullet; Built using TypeScript & Web Components</p>
+            <p>&bullet; Lightweight, no external dependencies other than dev-dependencies</p>
+            <p>&bullet; Global styling and variables allow defining a consistent yet customizable look & feel</p>
+            <p>&bullet; Tested using vitest</p>
+            <p>&bullet; Each component is well documented</p>
+            <p>&bullet; Demo showcase (this page)</p>
         </div>
 
         <!-- Installation -->
-        <div id="installation">
+        <div id="installation" class="mb-5">
             <h2>Library installation:</h2>
             <pre>// TODO: npm install industrial-ui</pre>
         </div>
 
         <!-- Button component -->
-        <div id="button">
+        <div id="button-component" class="mb-5">
             <h2>Button</h2>
             <p>A customizable button web component with multiple style variants.</p>
             <h4>Usage:</h4>
-            <pre><em>&lt;ind-button&gt;</em>Click Me<em>&lt;/ind-button&gt;</em></pre>
+            <pre><em>&lt;ind-button&gt;</em>Click me<em>&lt;/ind-button&gt;</em></pre>
             <h4>Attributes:</h4>
             <table class="code">
                 <thead>
@@ -66,7 +62,7 @@
                     <td><em>disabled</em></td>
                     <td>boolean</td>
                     <td>false</td>
-                    <td>Disables the button</td>
+                    <td>Disable the button</td>
                 </tr>
                 <tr>
                     <td><em>icon</em></td>
@@ -136,7 +132,7 @@ setDisabled(value: boolean): void {...}</pre>
         </div>
 
         <!-- Card component -->
-        <div id="card">
+        <div id="card-component" class="mb-5">
             <h2>Card</h2>
             <p>A customizable card web component.</p>
             <h4>Usage:</h4>
@@ -187,7 +183,7 @@ setDisabled(value: boolean): void {...}</pre>
         </div>
 
         <!-- Knob component -->
-        <div id="knob">
+        <div id="knob-component" class="mb-5">
             <h2>Knob</h2>
             <p>A customizable knob web component.</p>
             <h4>Usage:</h4>
@@ -207,7 +203,7 @@ setDisabled(value: boolean): void {...}</pre>
                     <td><em>disabled</em></td>
                     <td>boolean</td>
                     <td>false</td>
-                    <td>Disables the knob</td>
+                    <td>Disable the knob</td>
                 </tr>
                 <tr>
                     <td><em>grid</em></td>
@@ -292,8 +288,105 @@ setDisabled(value: boolean): void {...}</pre>
             </div>
         </div>
 
+        <!-- Menubar component -->
+        <div id="menubar-component" class="mb-5">
+            <h2>Menubar</h2>
+            <p>A top bar component that can host user menus and other objects.<br>
+               It is part of the <em>&lt;ind-application&gt;</em> component to be placed in the <em>menubar</em> slot.<br>
+               By default it allows changing the theme.</p>
+            <h4>Usage:</h4>
+            <pre><em>&lt;div</em> slot=<em>"menubar"&gt;</em>
+    <em>&lt;ind-menubar</em> id=<em>"menubar"&gt;&lt;/ind-menubar&gt;</em>
+<em>&lt;/div&gt;</em></pre>
+            <p class="mt-5">This demo features a full example of the menubar component.</p>
+        </div>
+
+        <!-- Sidebar component -->
+        <div id="sidebar-component" class="mb-5">
+            <h2>Sidebar</h2>
+            <p>A side bar component that displays the name of the application its logo and a list of buttons.<br>
+               It is part of the <em>&lt;ind-application&gt;</em> component to be placed in the <em>sidebar</em> slot.<br>
+               In the <em>compact</em> mode it will display only the icons of the buttons.
+            <h4>Usage:</h4>
+            <pre><em>&lt;div</em> slot=<em>"sidebar"&gt;</em>
+    <em>&lt;ind-sidebar</em> id=<em>"sidebar"</em> name=<em>"Industrial UI"&gt;&lt;/ind-sidebar&gt;</em>
+<em>&lt;/div&gt;</em></pre>
+            <p class="mt-5">This is how to specify the sidebar items:</p>
+            <pre class="mt-5">
+document.querySelector('#sidebar').items = [
+    {
+        label: "Category",
+        children: [
+            {label: "About", link: "#about", icon: "about"},
+            {label: "Button", link: "#button", icon: "button"}
+        ]
+    }
+];</pre>
+            <p class="mt-5">This demo features a full example of the sidebar component.</p>
+        </div>
+
+        <!-- Tile component -->
+        <div id="tile-component" class="mb-5">
+            <h2>Tile</h2>
+            <p>A customizable tile web component.</p>
+            <h4>Usage:</h4>
+            <pre><em>&lt;ind-tile&gt;</em>Click me<em>&lt;/ind-tile&gt;</em></pre>
+            <h4>Attributes:</h4>
+            <table class="code">
+                <thead>
+                <tr>
+                    <th>Attribute</th>
+                    <th>Type</th>
+                    <th>Default</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><em>active</em></td>
+                    <td>boolean</td>
+                    <td>false</td>
+                    <td>Set the tile active or not</td>
+                </tr>
+                <tr>
+                    <td><em>disabled</em></td>
+                    <td>boolean</td>
+                    <td>false</td>
+                    <td>Disable the tile</td>
+                </tr>
+                <tr>
+                    <td><em>icon</em></td>
+                    <td>string</td>
+                    <td>undefined</td>
+                    <td>Specify the icon name. One of: plus, minus, close, check, etc</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h4>Public API:</h4>
+            <pre>isDisabled(): boolean {...}
+setDisabled(value: boolean): void {...}</pre>
+            <h4>Events:</h4>
+            <pre>A CustomEvent of type <em>'tile-click-event'</em> is triggered when the native event <em>'click'</em> is called</pre>
+
+            <h4>Examples:</h4>
+            <div class="presentation">
+                <h5>Basic Tile</h5>
+                <ind-tile>Example</ind-tile>
+                <pre><em>&lt;ind-tile&gt;</em>Example<em>&lt;/ind-tile&gt;</em></pre>
+            </div>
+
+            <div class="presentation">
+                <h5>With Icons</h5>
+                <ind-tile icon="light-bulb">Lights</ind-tile>
+                <ind-tile icon="light-bulb" active="true">Lights</ind-tile>
+                <pre><em>&lt;ind-tile</em> icon=<em>"light-bulb"&gt;</em>Lights<em>&lt;/ind-tile&gt;</em>
+<em>&lt;ind-tile</em> icon=<em>"light-bulb"</em> active=<em>"true"&gt;</em>Lights<em>&lt;/ind-tile&gt;</em></pre>
+            </div>
+        </div>
+
         <!-- Toggle Switch component -->
-        <div id="toggle-switch">
+        <div id="toggle-switch-component" class="mb-5">
             <h2>ToggleSwitch</h2>
             <p>A customizable toggle switch web component.</p>
             <h4>Usage:</h4>
@@ -310,25 +403,25 @@ setDisabled(value: boolean): void {...}</pre>
                 </thead>
                 <tbody>
                 <tr>
-                    <td>checked</td>
+                    <td><em>checked</em></td>
                     <td>boolean</td>
                     <td>false</td>
                     <td>Whether the toggle switch is checked</td>
                 </tr>
                 <tr>
-                    <td>disabled</td>
+                    <td><em>disabled</em></td>
                     <td>boolean</td>
                     <td>false</td>
-                    <td>Disables the toggle switch</td>
+                    <td>Disable the toggle switch</td>
                 </tr>
                 <tr>
-                    <td>label</td>
+                    <td><em>label</em></td>
                     <td>string</td>
                     <td>undefined</td>
                     <td>Define the text label</td>
                 </tr>
                 <tr>
-                    <td>variant</td>
+                    <td><em>variant</em></td>
                     <td>string</td>
                     <td>"primary"</td>
                     <td>Toggle switch style variant. One of: primary, secondary, success, info, warn, danger</td>
@@ -402,8 +495,33 @@ setDisabled(value: boolean): void {...}</pre>
             </div>
         </div>
 
-        <div class="py-6"></div>
+        <p class="mb-2">Handcrafted by Alexandru Cristian Georgescu</p>
     </div>
 </ind-application>
+<script>
+    customElements.whenDefined('ind-sidebar').then(() => {
+        document.querySelector('#sidebar').items = [
+            {
+                label: "Setup",
+                children: [
+                    {label: "About", link: "#about", icon: "about"},
+                ]
+            },
+            {
+                label: "Components",
+                children: [
+                    {label: "Button", link: "#button-component", icon: "button"},
+                    {label: "Card", link: "#card-component", icon: "card"},
+                    {label: "Knob", link: "#knob-component", icon: "knob"},
+                    {label: "Menu", link: "#menu-component", icon: "menu"},
+                    {label: "Menubar", link: "#menubar-component", icon: "menubar"},
+                    {label: "Sidebar", link: "#sidebar-component", icon: "sidebar"},
+                    {label: "Tile", link: "#tile-component", icon: "tile"},
+                    {label: "Toggle Switch", link: "#toggle-switch-component", icon: "switch"}
+                ]
+            }
+        ];
+    });
+</script>
 </body>
 </html>
