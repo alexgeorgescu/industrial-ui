@@ -9,73 +9,32 @@ import { IndBaseComponent } from "../base/base-component.js";
  */
 export class IndApplication extends IndBaseComponent {
 
+    _template: HTMLTemplateElement = document.createElement('template');
+
     constructor() {
         super();
+        this.defineTemplate();
     }
 
     protected render(): void {
-
-        this.injectStyles(this.getStyles());
-
-        const application: HTMLDivElement = document.createElement('div');
-        application.className             = 'application';
-
-        const headerSlot: HTMLSlotElement = document.createElement('slot');
-        headerSlot.name                   = 'header';
-
-        const mainContainer: HTMLDivElement = document.createElement('div');
-        mainContainer.className             = 'main-container';
-
-        const sidebarSlot: HTMLSlotElement = document.createElement('slot');
-        sidebarSlot.name                   = 'sidebar';
-
-        const mainContents: HTMLDivElement = document.createElement('div');
-        mainContents.className             = 'main-contents';
-
-        const mainSlot: HTMLSlotElement = document.createElement('slot');
-        mainContents.appendChild(mainSlot);
-
-        mainContainer.appendChild(sidebarSlot)
-        mainContainer.appendChild(mainContents);
-        application.appendChild(headerSlot);
-        application.appendChild(mainContainer)
-
-        this.shadow.appendChild(application);
+        this.shadow.appendChild(this._template.content.cloneNode(true));
     }
 
-    private getStyles(): string {
-        return `
-      :host {
-        display: flex;
-        flex-direction: column;
-      }
-
-      .application {
-        display: flex;
-        flex-direction: column;
-        width: 100vw;
-        height: 100vh;
-        padding: 0;
-        margin: 0;
-        border: 0;
-        overflow-x: hidden;
-      }
-
-      .main-container {
-        display: flex;
-        height: 100vh;
-        flex-direction: row;
-        overflow: hidden;
-      }
-      
-      .main-contents {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        padding: 0 1rem;
-        overflow-y: scroll;
-      }
-      `
+    private defineTemplate(): void {
+        this._template.innerHTML = `
+        <style>
+            :host                       { display: flex; flex-grow: 1; }
+            .ind-application            { display: flex; flex-grow: 1; background: var(--base-background-color); }
+            .ind-application-container  { display: flex; flex-grow: 1; flex-direction: column; }
+        </style>
+        <div class="ind-application">
+            <slot name="sidebar"></slot>
+            <div class="ind-application-container">
+                <slot name="menubar"></slot>
+                <slot></slot>
+            </div>            
+        </div>
+        `;
     }
 }
 

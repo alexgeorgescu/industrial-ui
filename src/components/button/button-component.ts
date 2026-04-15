@@ -8,27 +8,31 @@ import { getIconByName }    from "../../icons/index.js";
  *
  * @attr {boolean} disabled - Whether the button is disabled
  * @attr {string} icon - The icon to display on the button (from the IndustrialUI icon set)
- * @attr {string} variant - Button style: 'primary' | 'secondary' | 'success' | 'info' | 'warn' | 'danger' (default: 'primary')
+ * @attr {string} variant - Button style: 'primary' | 'secondary' | 'success' | 'icon' | 'info' | 'warn' | 'danger' (default: 'primary')
  *
  * @example <ind-button variant="success">I am a button</ind-button>
  */
 export class IndButton extends IndBaseComponent {
 
+    /* The underlying native element */
     private _button: HTMLButtonElement | undefined;
+    /* Whether the button is disabled or not */
     private _isDisabled: boolean     = false;
+    /* Specify the icon name */
     private _iconName: string | null = null;
+    /* Specify the variant: primary, secondary, etc. */
     private _variant: string         = 'primary';
 
     constructor() {
         super();
     }
 
-    // Public API
+    /* Public API */
 
-    /* Check if the toggle switch is disabled or not */
+    /* Check if the button is disabled or not */
     isDisabled(): boolean { return this._button ? this._button.disabled : false; }
 
-    /* Enable or disable the toggle switch */
+    /* Enable or disable the button */
     setDisabled(value: boolean): void { this._button && (this._button.disabled = value); }
 
     static get observedAttributes() {
@@ -92,7 +96,9 @@ export class IndButton extends IndBaseComponent {
     }
 
     private extractIcon(iconName: string): HTMLSpanElement | null {
-        const iconSvg = getIconByName(iconName, "sm");
+        const iconSvg = this._variant === 'icon'
+            ? getIconByName(iconName, "lg", 2)
+            : getIconByName(iconName, "md", 2);
         if (iconSvg) {
             const iconSpan: HTMLSpanElement = document.createElement('span');
             iconSpan.className              = 'btn-icon';
@@ -104,89 +110,36 @@ export class IndButton extends IndBaseComponent {
 
     private getStyles(): string {
         return `
-      .btn {
-        display: flex;
-        border: none;
-        cursor: pointer;
-        font-family: var(--font-sans);
-        font-size: var(--font-size-base);
-        font-weight: var(--font-medium);
-        transition: all 0.2s ease;
-        align-items: center;
-        padding: 0.5rem 1rem;
-      }
-      
-      .btn:focus {
-        outline: 0.125rem solid var(--outline-color);
-        outline-offset: 0.125rem;
-      }
-
-      .btn:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-      }
-
-      .btn-primary {
-        background-color: var(--primary-color);
-        color: var(--base-color); 
-      }
-      
-      .btn-primary:hover {
-        background-color: var(--primary-hover-color);
-      }
-      
-      .btn-secondary {
-        background-color: var(--secondary-color);
-        color: var(--base-reverse-color);
-      }
-      
-      .btn-secondary:hover {
-        background-color: var(--secondary-hover-color);
-      }
-      
-      .btn-success {
-        background-color: var(--success-color);
-        color: var(--base-color); 
-      }
-      
-      .btn-success:hover {
-        background-color: var(--success-hover-color);
-      }
-      
-      .btn-info {
-        background-color: var(--info-color);
-        color: var(--base-color);
-      }
-      
-      .btn-info:hover {
-        background-color: var(--info-hover-color);
-      }
-      
-      .btn-warn {
-        background-color: var(--warn-color);
-        color: var(--base-reverse-color);
-      }
-      
-      .btn-warn:hover {
-        background-color: var(--warn-hover-color);
-      }
-      
-      .btn-danger {
-        background-color: var(--danger-color);
-        color: var(--base-color);
-      }
-      
-      .btn-danger:hover {
-        background-color: var(--danger-hover-color);
-      }
-      
-      .btn-icon {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0 0.25rem 0 -0.25rem;
-      }
-    `
+        .btn {
+            display: flex;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-sans);
+            font-size: var(--font-size-base);
+            font-weight: var(--font-medium);
+            transition: all 0.2s ease;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            gap: 0.25rem;
+        }
+        .btn:focus              { outline: 0.125rem solid var(--base-outline-color); outline-offset: 0.125rem; }
+        .btn:disabled           { opacity: 0.6; cursor: not-allowed; }
+        .btn-primary            { background-color: var(--base-primary-color); color: var(--base-button-text-color); }
+        .btn-primary:hover      { background-color: var(--base-primary-hover-color); }
+        .btn-secondary          { background-color: var(--base-secondary-color); color: var(--base-button-text-color); }
+        .btn-secondary:hover    { background-color: var(--base-secondary-hover-color); }
+        .btn-success            { background-color: var(--base-success-color); color: var(--base-button-text-color); }
+        .btn-success:hover      { background-color: var(--base-success-hover-color); }
+        .btn-icon               { background-color: transparent; padding: 0.125rem; }
+        .btn-info               { background-color: var(--base-info-color); color: var(--base-button-text-color); }
+        .btn-info:hover         { background-color: var(--base-info-hover-color); }
+        .btn-warn               { background-color: var(--base-warn-color); color: var(--base-button-text-color); }
+        .btn-warn:hover         { background-color: var(--base-warn-hover-color); }
+        .btn-danger             { background-color: var(--base-danger-color); color: var(--base-button-text-color); }
+        .btn-danger:hover       { background-color: var(--base-danger-hover-color); }
+        .btn-icon               { display: flex; justify-content: center; align-items: center; margin: 0 0.25rem 0 -0.25rem; }
+        .btn-icon.btn-icon      { margin: 0; }
+        `
     }
 }
 

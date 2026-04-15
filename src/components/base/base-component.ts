@@ -2,8 +2,10 @@
  * The base component to be extended by all other components.
  */
 export abstract class IndBaseComponent extends HTMLElement {
-    protected shadow: ShadowRoot;               // The Shadow DOM API
-    protected _initialized: boolean = false;    // Flag to know if the component is initialized
+    /* The Shadow DOM API */
+    protected shadow: ShadowRoot;
+    /* Flag to know if the component is initialized */
+    protected _initialized: boolean = false;
 
     constructor() {
         super();

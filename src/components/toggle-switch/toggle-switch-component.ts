@@ -14,17 +14,22 @@ import { IndBaseComponent } from "../base/base-component.js";
  */
 export class IndToggleSwitch extends IndBaseComponent {
 
+    /* The underlying native element */
     private _toggle: HTMLInputElement | undefined;
+    /* Whether the switch is checked or not */
     private _isChecked: boolean   = false;
+    /* Whether the switch is disabled or not */
     private _isDisabled: boolean  = false;
+    /* Specify the label */
     private _label: string | null = null;
+    /* Specify the variant: primary, secondary, etc. */
     private _variant: string      = 'primary';
 
     constructor() {
         super();
     }
 
-    // Public API
+    /* Public API */
 
     /* Check if the toggle switch is checked or not */
     isChecked(): boolean { return this._toggle ? this._toggle.checked : false; }
@@ -114,111 +119,45 @@ export class IndToggleSwitch extends IndBaseComponent {
 
     private getStyles(): string {
         return `
-      :host {
-        display: inline-block;
-        font-family: var(--font-sans);
-      }
-
-      .container {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-
-      .switch {
-        position: relative;
-        display: inline-block;
-        width: 48px;
-        height: 26px;
-        cursor: pointer;
-      }
-
-      .switch input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-      }
-
-      .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: var(--neutral-background-color);
-        transition: 0.3s;
-        border-radius: 2.5rem;
-      }
-
-      .slider:before {
-        position: absolute;
-        content: "";
-        height: 1.25rem;
-        width: 1.25rem;
-        left: 0.188rem;
-        bottom: 0.188rem;
-        background-color: white;
-        transition: 0.3s;
-        border-radius: 50%;
-      }
-
-      input:checked +.slider.primary {
-        background-color: var(--primary-color);
-      }
-      
-      input:checked +.slider.secondary {
-        background-color: var(--secondary-color);
-      }
-      
-      .slider.secondary:before {
-        background: var(--secondary-reverse-color);
-      }
-      
-      input:checked +.slider.success {
-        background-color: var(--success-color);
-      }
-      
-      input:checked +.slider.info {
-        background-color: var(--info-color);
-      }
-      
-      input:checked +.slider.warn {
-        background-color: var(--warn-color);
-      }
-      
-      input:checked +.slider.danger {
-        background-color: var(--danger-color);
-      }
-
-      input:focus + .slider {
-        outline: 0.125rem solid var(--outline-color);
-        outline-offset: 0.125rem;
-      }
-
-      input:checked + .slider:before {
-        transform: translateX(1.375rem);
-      }
-
-      input:disabled + .slider {
-        opacity: 0.5;
-        cursor: not-allowed;
-      }
-
-      .switch:has(input:disabled) {
-        cursor: not-allowed;
-      }
-
-      .label {
-        font-size: var(--font-size-sm);
-        color: #333;
-        user-select: none;
-      }
-
-      :host([disabled]) .label {
-        color: #999;
-      }
-    `
+        :host           { display: inline-block; font-family: var(--font-sans); }
+        .container      { display: flex; align-items: center; gap: 0.5rem; }
+        .switch         { display: inline-block; position: relative; width: 3rem; height: 1.625rem; cursor: pointer; }
+        .switch input   { opacity: 0; width: 0; height: 0;}
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--base-text-dim-color);
+            transition: 0.3s;
+            border-radius: 2.5rem;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 1.25rem;
+            width: 1.25rem;
+            left: 0.188rem;
+            bottom: 0.188rem;
+            background-color: var(--base-text-reverse-color);
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+        input:checked +.slider.primary      { background-color: var(--base-primary-color); }
+        input:checked +.slider.secondary    { background-color: var(--base-secondary-color); }
+        input:checked +.slider.success      { background-color: var(--base-success-color); }
+        input:checked +.slider.info         { background-color: var(--base-info-color); }
+        input:checked +.slider.warn         { background-color: var(--base-warn-color); }
+        input:checked +.slider.danger       { background-color: var(--base-danger-color); }
+        input:focus + .slider               { outline: 0.125rem solid var(--base-outline-color); outline-offset: 0.125rem; }
+        input:checked + .slider:before      { transform: translateX(1.375rem); }
+        input:disabled + .slider            { opacity: 0.5; cursor: not-allowed; }
+        .switch:has(input:disabled)         { cursor: not-allowed; }
+        .label                              { font-size: var(--font-size-sm); color: var(--base-text-color); user-select: none; }
+        :host([disabled]) .label            { color: var(--base-text-muted-color); }
+        `
     }
 }
 

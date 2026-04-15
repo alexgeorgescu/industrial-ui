@@ -9,6 +9,9 @@ import { IndBaseComponent } from "../base/base-component.js";
  */
 export class IndCard extends IndBaseComponent {
 
+    /* The underlying native element */
+    private _card: HTMLDivElement | undefined;
+
     constructor() {
         super();
     }
@@ -17,8 +20,8 @@ export class IndCard extends IndBaseComponent {
 
         this.injectStyles(this.getStyles());
 
-        const card: HTMLDivElement = document.createElement('div');
-        card.className             = `card`;
+        this._card     = document.createElement('div');
+        this._card.className = `card`;
 
         // Card header
         const header: HTMLDivElement      = document.createElement('div');
@@ -40,53 +43,53 @@ export class IndCard extends IndBaseComponent {
         footerSlot.name                   = 'footer';
         footer.appendChild(footerSlot);
 
-        card.appendChild(header);
-        card.appendChild(body);
-        card.appendChild(footer);
+        this._card.appendChild(header);
+        this._card.appendChild(body);
+        this._card.appendChild(footer);
 
-        this.shadow.appendChild(card);
+        this.shadow.appendChild(this._card);
     }
 
     private getStyles(): string {
         return `
-      .card {
-        display: flex;
-        flex-direction: column;
-        color: var(--base-text-color);
-        background: var(--base-color);
-        border-radius: 0.5rem;
-        overflow: hidden;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        border: 1px solid var(--border-color);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-
-      .card:hover {
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-      }
-
-      .card-header {
-        padding: 1rem;
-        font-size: var(--font-size-xl);
-        font-weight: bold;
-        border-bottom: 1px solid var(--border-color);
-      }
-      
-      .card-body {
-        display: flex;
-        padding: 1rem;
-        flex-grow: 1;
-      }
-
-      .card-footer {
-        display: flex;
-        flex-direction: row;
-        padding: 1rem;
-        border-top: 1px solid var(--border-color);
-        justify-content: end;
-        gap: 0.5rem;
-      }
-      `
+        .card {
+            display: flex;
+            flex-direction: column;
+            color: var(--base-text-color);
+            background: var(--base-surface-color);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            border: 1px solid var(--base-border-color);
+            box-shadow: 0 0 0.125rem var(--base-border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 0 0.5rem var(--base-border-color);
+        }
+        
+        .card-header {
+            padding: 1rem;
+            font-size: var(--font-size-xl);
+            font-weight: bold;
+            border-bottom: 1px solid var(--base-border-color);
+        }
+        
+        .card-body {
+            display: flex;
+            padding: 1rem;
+            flex-grow: 1;
+        }
+        
+        .card-footer {
+            display: flex;
+            flex-direction: row;
+            padding: 1rem;
+            border-top: 1px solid var(--base-border-color);
+            justify-content: end;
+            gap: 0.5rem;
+        }
+        `
     }
 }
 

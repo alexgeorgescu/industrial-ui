@@ -11,8 +11,11 @@ export const XMLNS: string = "http://www.w3.org/2000/svg";
  */
 export class IndKnob extends IndBaseComponent {
 
+    /* The underlying native element */
     private _knob: Element | undefined;
+    /* Whether the knob is disabled or not */
     private _isDisabled: boolean = false;
+    /* Flag to know if a drag operation is ongoing or not */
     private _isDragging: boolean = false;
 
     private _value: number     = 0;    // 0 to 1
@@ -26,7 +29,7 @@ export class IndKnob extends IndBaseComponent {
         super();
     }
 
-    // Public API
+    /* Public API */
 
     /* Check if the knob is disabled or not */
     isDisabled(): boolean { return this._isDisabled; }
@@ -123,6 +126,7 @@ export class IndKnob extends IndBaseComponent {
         label.setAttribute('y', '76');
         label.setAttribute('text-anchor', 'middle');
         label.setAttribute('font-size', '16px');
+        label.setAttribute('class', 'label');
         // De-normalize value from 0-100 to min-max
         const value = Math.round(this._value * (this._max - this._min) + this._min);
         const textNode = document.createTextNode(`${value}${this._symbol}`);
@@ -249,45 +253,15 @@ export class IndKnob extends IndBaseComponent {
 
     private getStyles(): string {
         return `
-      :host {
-        display: inline-block;
-        touch-action: none;
-        cursor: pointer;
-      }
-
-      svg {
-        width: 100%;
-        height: 100%;
-        overflow: visible;
-      }
-
-      svg.disabled {
-        cursor: not-allowed;
-      }
-      
-      svg.disabled .dial {
-        stroke: var(--secondary-reverse-color);
-      }
-
-      .dial {
-        fill: none;
-        stroke: var(--primary-color);
-        stroke-width: 10;
-      }
-
-      .line {
-        fill: none;
-        stroke: var(--primary-color);
-        stroke-width: 3;
-      }
-
-      .pointer {
-        fill: var(--base-color);
-        stroke: var(--primary-color);
-        stroke-width: 2;
-        filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
-      }
-    `
+        :host               { display: inline-block; touch-action: none; cursor: pointer; }
+        svg                 { width: 100%; height: 100%; overflow: visible; }
+        svg.disabled        { cursor: not-allowed; }
+        svg.disabled .dial  { stroke: var(--base-primary-hover-color); }
+        .dial               { fill: none; stroke: var(--base-primary-color); stroke-width: 10; }
+        .label              { fill: var(--base-text-color); }
+        .line               { fill: none; stroke: var(--base-primary-color); stroke-width: 3; }
+        .pointer            { fill: var(--base-text-reverse-color); stroke: var(--base-primary-color); stroke-width: 2; filter: drop-shadow(0 0 5px rgba(0,0,0,0.5)); }
+        `
     }
 }
 
