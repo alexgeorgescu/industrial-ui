@@ -4,9 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>Industrial UI - A lightweight modular UI industrial & IOT component library</title>
-    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
-    <link rel="stylesheet" href="../index.css">
-    <script type="module" src="../index.js"></script>
+    <script>
+        (function loadIndustrialUIAssets() {
+            const isDemoSource = window.location.pathname.includes('/demo/');
+            const assetBase = isDemoSource ? '../dist/' : './';
+
+            const favicon = document.createElement('link');
+            favicon.rel = 'icon';
+            favicon.type = 'image/x-icon';
+            favicon.href = assetBase + 'assets/favicon.ico';
+            document.head.appendChild(favicon);
+
+            const stylesheet = document.createElement('link');
+            stylesheet.rel = 'stylesheet';
+            stylesheet.href = assetBase + 'index.css';
+            document.head.appendChild(stylesheet);
+
+            const moduleScript = document.createElement('script');
+            moduleScript.type = 'module';
+            moduleScript.src = assetBase + 'index.js';
+            document.head.appendChild(moduleScript);
+        })();
+    </script>
 </head>
 <body>
 <ind-application>
