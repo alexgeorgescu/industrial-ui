@@ -1,5 +1,6 @@
 import { IndBaseComponent } from "../base/base-component.js";
 import { IndMenu }          from "../menu/menu-component.js";
+import { setTheme }         from "../../theme/theme-preferences.js";
 
 /**
  * IndustrialUI Menubar Component
@@ -45,9 +46,9 @@ export class IndMenubar extends IndBaseComponent {
         themeButton.addEventListener('click', () => {
             const menu: IndMenu = new IndMenu('1.5rem', '-11.5rem', 'Select theme');
             menu.items = [
-                {label: 'IOT Dark Pink', action: () => document.documentElement.setAttribute('data-theme', 'iot-dark-pink') },
-                {label: 'IOT Dark Green', action: () => document.documentElement.setAttribute('data-theme', 'iot-dark-green') },
-                {label: 'IOT Light Tomato', action: () => document.documentElement.setAttribute('data-theme', 'iot-light-tomato') }
+                {label: 'IOT Dark Pink', action: () => setTheme('iot-dark-pink') },
+                {label: 'IOT Dark Green', action: () => setTheme('iot-dark-green') },
+                {label: 'IOT Light Tomato', action: () => setTheme('iot-light-tomato') }
             ];
             this._menubar?.appendChild(menu);
         });

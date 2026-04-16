@@ -1,4 +1,5 @@
 import './styles/global.css';
+import { restoreThemePreference } from './theme/theme-preferences.js';
 
 // Export components
 export { IndApplication }  from './components/application/application-component.js';
@@ -13,3 +14,6 @@ export { IndToggleSwitch } from './components/toggle-switch/toggle-switch-compon
 
 // Export icons
 export * from "./icons/index.js";
+
+// Restore theme preference
+restoreThemePreference();
