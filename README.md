@@ -19,7 +19,7 @@ A demo of all the features and components is available here:
 https://alexgeorgescu.github.io/industrial-ui
 
 ## Local demo
-Run `npm run dev` and open `http://localhost:3000`.
+Run both `npm run dev` and `npm run serve` and open `http://localhost:3000`.
 
 
 ## Docker
